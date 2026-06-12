@@ -57,6 +57,7 @@
   .lgi b{font-size:12px}
   /* chart */
   .chart{padding:16px}.chart .empty{height:200px;display:grid;place-items:center;color:var(--faint);font-size:13px;text-align:center;border:1px dashed var(--line);border-radius:12px}
+  .trendcap{font-size:12px;color:var(--faint);margin:11px 4px 0;line-height:1.5}
   /* matches */
   .note{font-size:12.5px;color:var(--dim);background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:13px;line-height:1.5}
   .note .k{display:inline-flex;align-items:center;gap:5px;margin-right:9px;white-space:nowrap}
@@ -131,8 +132,9 @@
 
   <!-- TREND -->
   <div class="panel" id="trend">
-    <div class="lbl">Points by matchday</div>
-    <div class="card chart"><div class="empty">📈 The lines appear once the first matches are played.<br>Each player gets their own colour.</div></div>
+    <div class="lbl">Cumulative points · by game</div>
+    <div class="card chart"><div id="trendchart"></div></div>
+    <p class="trendcap" id="trendcap"></p>
   </div>
 
   <!-- LAST -->
@@ -237,6 +239,32 @@ document.getElementById('lastgames').innerHTML=LAST.map(m=>{
     <div class="picks">${rows}</div>
   </div>`;
 }).join('');
+
+// trend — cumulative points by game (derived from LAST, chronological)
+function renderTrend(){
+  const host=document.getElementById('trendchart'); if(!host) return;
+  const games=[...LAST].reverse();
+  if(!games.length){host.innerHTML='<div class="empty">📈 Lines appear once matches are played.</div>';return;}
+  const perGame=games.map(m=>{const mp={};m[7].split(' · ').filter(Boolean).forEach(s=>{const x=s.match(/^(.*)\s(\d+-\d+)\|(\d+)$/);if(x)mp[x[1]]=+x[3];});return mp;});
+  const series=STAND.map(r=>r[0]).map(nm=>{let c=0;const arr=[0];perGame.forEach(g=>{c+=(g[nm]||0);arr.push(c);});return {nm,arr,total:arr[arr.length-1]};});
+  series.sort((a,b)=>b.total-a.total||a.nm.localeCompare(b.nm));
+  const K=series.length<=6?series.length:5, top=new Set(series.slice(0,K).map(s=>s.nm));
+  const n=games.length, maxY=Math.max(10,Math.ceil(Math.max(...series.map(s=>s.total))/5)*5);
+  const W=320,H=190,pl=24,pr=12,pT=12,pB=26;
+  const X=i=>pl+(W-pl-pr)*(n?i/n:0), Y=v=>pT+(H-pT-pB)*(1-v/maxY);
+  let g='';
+  [0,maxY/2,maxY].forEach(v=>{const yy=Y(v);g+=`<line x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}" stroke="var(--line)"/><text x="${pl-5}" y="${yy+3}" text-anchor="end" font-size="9" fill="var(--faint)">${v}</text>`;});
+  for(let i=1;i<=n;i++)g+=`<text x="${X(i)}" y="${H-12}" text-anchor="middle" font-size="9" fill="var(--faint)">${i}</text>`;
+  g+=`<text x="${(pl+W-pr)/2}" y="${H-2}" text-anchor="middle" font-size="8.5" fill="var(--faint)">games played →</text>`;
+  let dim='',hot='';
+  series.forEach(s=>{const p=s.arr.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
+    if(top.has(s.nm)){const c=col(s.nm);hot+=`<polyline points="${p}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${X(n)}" cy="${Y(s.total)}" r="2.7" fill="${c}"/>`;}
+    else dim+=`<polyline points="${p}" fill="none" stroke="var(--line2)" stroke-width="1.2" opacity=".45" stroke-linejoin="round"/>`;});
+  host.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">${g}${dim}${hot}</svg>`+
+    `<div class="legend" style="margin-top:12px">`+series.slice(0,K).map(s=>`<span class="lgi"><span style="width:9px;height:9px;border-radius:2px;background:${col(s.nm)};display:inline-block"></span>${s.nm} · <b>${s.total}</b></span>`).join('')+`</div>`;
+  const cap=document.getElementById('trendcap'); if(cap) cap.textContent=n<3?`Only ${n} game${n>1?'s':''} in — the field's still bunched; lines fan out as the tournament runs.`:'';
+}
+renderTrend();
 
 // tabs
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{

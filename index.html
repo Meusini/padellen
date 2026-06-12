@@ -24,8 +24,8 @@
   .lead{padding:2px 2px 0}
   .lead h1{margin:0;font-size:19px;letter-spacing:-.3px;font-weight:800}
   .lead p{margin:3px 0 0;color:var(--dim);font-size:13px}
-  .tabs{position:sticky;top:52px;z-index:18;display:flex;gap:6px;padding:14px 0 12px;background:linear-gradient(var(--bg),var(--bg) 70%,transparent)}
-  .tabs button{flex:1;font:inherit;font-size:13px;font-weight:700;color:var(--dim);background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 4px;cursor:pointer;transition:.15s}
+  .tabs{position:sticky;top:52px;z-index:18;display:flex;gap:5px;padding:14px 0 12px;background:linear-gradient(var(--bg),var(--bg) 70%,transparent)}
+  .tabs button{flex:1;font:inherit;font-size:12px;font-weight:700;color:var(--dim);background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 3px;cursor:pointer;transition:.15s}
   .tabs button.on{color:#06241b;background:linear-gradient(135deg,var(--green),#28c9a0);border-color:transparent}
   .panel{display:none;animation:fade .2s ease}.panel.on{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
@@ -69,6 +69,23 @@
   .ttip .tt-sc{color:var(--dim);font-variant-numeric:tabular-nums}
   .ttip .tt-p{font-weight:800;font-variant-numeric:tabular-nums}
   .tleg .lgi{cursor:default}
+  /* changes feed */
+  .chday{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--green);font-weight:800;margin:16px 6px 8px}
+  .chday:first-child{margin-top:4px}
+  .chrow{display:flex;gap:10px;align-items:flex-start;padding:9px 6px}
+  .chrow+.chrow{border-top:1px solid var(--line)}
+  .chrow .av{width:25px;height:25px;border-radius:7px;display:grid;place-items:center;font-weight:800;font-size:9px;color:#0a0d12;flex:0 0 auto;margin-top:1px}
+  .chmain{flex:1;min-width:0}
+  .chtop{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .chp{font-weight:750;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .chtime{font-size:11px;color:var(--faint);white-space:nowrap;flex:0 0 auto;font-variant-numeric:tabular-nums}
+  .chsub{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:2px}
+  .chg{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .chg b{color:var(--faint);font-weight:700;margin-right:3px}
+  .chset{font-weight:800;font-variant-numeric:tabular-nums;font-size:13.5px;white-space:nowrap;flex:0 0 auto;color:var(--txt)}
+  .chold{color:var(--faint);text-decoration:line-through;font-weight:600}
+  .charr{color:var(--dim);margin:0 4px}
+  .chnew{color:var(--green);font-weight:800}
   /* matches */
   .note{font-size:12.5px;color:var(--dim);background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:13px;line-height:1.5}
   .note .k{display:inline-flex;align-items:center;gap:5px;margin-right:9px;white-space:nowrap}
@@ -111,10 +128,11 @@
   <div class="lead"><h1>Padellen Zonder Ballen 🎾⚽</h1><p id="sub"></p></div>
 
   <div class="tabs">
-    <button class="on" data-p="leaderboard">Leaderboard</button>
+    <button class="on" data-p="leaderboard">Table</button>
     <button data-p="trend">Trend</button>
     <button data-p="last">Last</button>
     <button data-p="next">Next</button>
+    <button data-p="changes">Changes</button>
   </div>
 
   <!-- LEADERBOARD -->
@@ -162,6 +180,13 @@
       <span style="display:inline-block;margin-top:6px">Each pick: <b class="g">🟢 backs the favourite</b> · <b class="a">🟡 draw</b> · <b class="x">🔴 backs the underdog</b></span>
     </div>
     <div class="card" id="games"></div>
+  </div>
+
+  <!-- CHANGES -->
+  <div class="panel" id="changes">
+    <div class="lbl">Recent prediction changes</div>
+    <div class="note">Who edited what, newest first. An edit shows its <b class="g">previous → new</b> score; entries logged before tracking started just show the current pick.</div>
+    <div class="card" id="changefeed" style="padding:4px 10px"></div>
   </div>
 
   <footer>
@@ -302,6 +327,42 @@ function renderTrend(){
   host.querySelectorAll('.tleg .lgi').forEach(el=>{const i=+el.dataset.i;el.addEventListener('mouseenter',()=>hl(new Set([i])));el.addEventListener('mouseleave',()=>hl(null));});
 }
 renderTrend();
+
+// changes — recent prediction activity. CHANGES = [player, gameNo, home, away, before, after, isoTime]; before=null = first log/added, set = edited.
+const CHANGES=[
+ ["Mahir Bikhan",4,"Verenigde Staten","Paraguay",null,"1-1","2026-06-12T08:18"],
+ ["MichaelVH",24,"Oezbekistan","Colombia",null,"0-2","2026-06-11T20:20"],
+ ["MichaelVH",23,"Ghana","Panama",null,"3-3","2026-06-11T20:19"],
+ ["MichaelVH",22,"Engeland","Kroatië",null,"1-2","2026-06-11T20:19"],
+ ["MichaelVH",21,"Portugal","DR Congo",null,"4-0","2026-06-11T20:18"],
+ ["MichaelVH",14,"België","Egypte",null,"3-2","2026-06-11T20:17"],
+ ["Mahir Bikhan",1,"Mexico","Zuid-Afrika",null,"2-0","2026-06-11T18:56"],
+ ["Mark VA",72,"Algerije","Oostenrijk",null,"2-3","2026-06-11T18:34"],
+ ["Mark VA",71,"Jordanië","Argentinië",null,"1-5","2026-06-11T18:34"],
+ ["Mark VA",70,"Colombia","Portugal",null,"0-2","2026-06-11T18:34"],
+ ["Mark VA",67,"Panama","Engeland",null,"0-3","2026-06-11T18:33"],
+ ["Mark VA",66,"Nieuw-Zeeland","België",null,"0-5","2026-06-11T18:33"],
+ ["Mark VA",64,"Kaapverdië","Saudi-Arabië",null,"0-2","2026-06-11T18:33"],
+ ["Mark VA",57,"Tunesië","Nederland",null,"1-2","2026-06-11T18:33"],
+ ["Mark VA",56,"Ecuador","Duitsland",null,"1-3","2026-06-11T18:32"]
+];
+function renderChanges(){
+  const host=document.getElementById('changefeed'); if(!host) return;
+  if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}
+  const now=new Date(), today=now.toDateString(), yest=new Date(now-864e5).toDateString();
+  const dayLabel=d=>{const s=d.toDateString();return s===today?'Today':s===yest?'Yesterday':d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});};
+  let html='',lastDay='';
+  CHANGES.forEach(c=>{
+    const [player,idx,home,away,before,after,mt]=c;
+    const d=new Date(mt), dl=dayLabel(d);
+    if(dl!==lastDay){html+=`<div class="chday">${dl}</div>`;lastDay=dl;}
+    const time=d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    const sc=before?`<span class="chold">${before}</span><span class="charr">→</span><span class="chnew">${after}</span>`:`<span class="chset">${after}</span>`;
+    html+=`<div class="chrow"><span class="av" style="background:${col(player)}">${ini(player)}</span><div class="chmain"><div class="chtop"><span class="chp">${before?'✏️ ':''}${player}</span><span class="chtime">${time}</span></div><div class="chsub"><span class="chg"><b>#${idx}</b>${home} – ${away}</span>${sc}</div></div></div>`;
+  });
+  host.innerHTML=html;
+}
+renderChanges();
 
 // tabs
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Padellen · WC 2026 Pool</title>
+<style>
+  :root{
+    --bg:#0b0d12; --card:#14171f; --card2:#171b24; --line:#232733; --line2:#2c3142;
+    --txt:#e8ebf2; --dim:#8b93a7; --faint:#5b6377;
+    --green:#34d399; --blue:#60a5fa; --amber:#fbbf24; --red:#f87171; --grey:#3c4458;
+    --shadow:0 10px 30px -14px rgba(0,0,0,.65);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--txt);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background-image:radial-gradient(800px 320px at 50% -120px,rgba(52,211,153,.09),transparent 70%)}
+  .app{max-width:600px;margin:0 auto;padding:0 16px 40px}
+  a{color:inherit}
+  .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px 2px;background:linear-gradient(var(--bg),rgba(11,13,18,.85));backdrop-filter:blur(8px)}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.2px;font-size:16px}
+  .brand .z{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:7px;background:linear-gradient(135deg,var(--green),#22d3a8);color:#06241b;font-weight:900;font-size:13px}
+  .spz{font-size:12px;color:var(--dim);text-decoration:none;border:1px solid var(--line);padding:6px 11px;border-radius:999px}
+  .lead{padding:2px 2px 0}
+  .lead h1{margin:0;font-size:19px;letter-spacing:-.3px;font-weight:800}
+  .lead p{margin:3px 0 0;color:var(--dim);font-size:13px}
+  .tabs{position:sticky;top:52px;z-index:18;display:flex;gap:6px;padding:14px 0 12px;background:linear-gradient(var(--bg),var(--bg) 70%,transparent)}
+  .tabs button{flex:1;font:inherit;font-size:13px;font-weight:700;color:var(--dim);background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 4px;cursor:pointer;transition:.15s}
+  .tabs button.on{color:#06241b;background:linear-gradient(135deg,var(--green),#28c9a0);border-color:transparent}
+  .panel{display:none;animation:fade .2s ease}.panel.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--dim);font-weight:700;margin:0 4px 9px}
+  /* state of play */
+  .sop{padding:0;margin-bottom:14px}
+  .sop .part{padding:13px 16px}
+  .sop .part+.part{border-top:1px solid var(--line)}
+  .sop .hd{display:flex;align-items:center;gap:8px;font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--green);font-weight:800;margin-bottom:7px}
+  .sop .hd.up{color:var(--blue)}
+  .sop p{margin:0;font-size:13.5px;line-height:1.55;color:#d4dae6}.sop b{color:#fff}
+  /* standings */
+  .tbl{padding:4px 4px}
+  .tr{display:grid;grid-template-columns:15px minmax(0,1fr) 24px 22px 20px 20px 31px 24px;align-items:center;gap:4px;padding:10px 4px}
+  .tr+.tr{border-top:1px solid var(--line)}
+  .th{font-size:13px;font-weight:800;padding:8px 4px 9px}
+  .tr.th .c{font-size:11px}
+  .c{text-align:center;font-variant-numeric:tabular-nums;font-size:14px;font-weight:700}
+  .c.z{color:var(--faint);font-weight:500}
+  .g{color:var(--green)} .b{color:var(--blue)} .a{color:var(--amber)} .x{color:var(--red)}
+  .rk{text-align:center;color:var(--faint);font-weight:800;font-variant-numeric:tabular-nums;font-size:13px}
+  .nm{min-width:0;font-weight:650;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pt{text-align:center;font-weight:800;font-variant-numeric:tabular-nums;font-size:15px}
+  .dl{text-align:center;font-size:12px;font-variant-numeric:tabular-nums;color:var(--faint)}
+  .dl.up{color:var(--green)}.dl.dn{color:var(--red)}
+  .legend{display:flex;flex-wrap:wrap;gap:6px;margin:11px 2px 0}
+  .lgi{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--dim);background:var(--card2);border:1px solid var(--line);padding:4px 9px;border-radius:8px}
+  .lgi b{font-size:12px}
+  /* chart */
+  .chart{padding:16px}.chart .empty{height:200px;display:grid;place-items:center;color:var(--faint);font-size:13px;text-align:center;border:1px dashed var(--line);border-radius:12px}
+  /* matches */
+  .note{font-size:12.5px;color:var(--dim);background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:13px;line-height:1.5}
+  .note .k{display:inline-flex;align-items:center;gap:5px;margin-right:9px;white-space:nowrap}
+  .game{padding:15px 16px}.game+.game{border-top:1px solid var(--line)}
+  .gh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .gh .tm{font-weight:750;font-size:15.5px;letter-spacing:-.2px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .gh .tm .vs{color:var(--faint);font-weight:500;margin:0 2px}
+  .fl{width:21px;height:15px;border-radius:2px;object-fit:cover;vertical-align:middle;box-shadow:0 0 0 1px rgba(255,255,255,.07)}
+  .gh .wh{font-size:11.5px;color:var(--faint);white-space:nowrap;margin-top:2px}
+  .odds{margin:13px 0 6px}
+  .obar{display:flex;height:9px;border-radius:5px;overflow:hidden;background:#0d1017}
+  .obar i{display:block;height:100%}.obar .h{background:var(--green)}.obar .d{background:var(--grey)}.obar .a{background:var(--red)}
+  .olab{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);margin-top:6px;font-variant-numeric:tabular-nums}
+  .olab .mid{color:var(--faint)}
+  .picks{margin-top:12px}
+  .pr{display:flex;align-items:center;gap:9px;padding:8px 2px}
+  .pr+.pr{border-top:1px solid var(--line)}
+  .pr.book{background:rgba(96,165,250,.07);margin:0 -16px;padding:9px 16px;border-radius:8px}
+  .pr .av{width:21px;height:21px;border-radius:6px;display:grid;place-items:center;font-weight:800;font-size:9px;color:#0a0d12;flex:0 0 auto}
+  .pr .bk{width:21px;height:21px;border-radius:6px;display:grid;place-items:center;font-size:12px;flex:0 0 auto;background:rgba(96,165,250,.18)}
+  .pr .n{flex:1;font-size:14px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pr.book .n{color:var(--txt);font-weight:700}
+  .pr .sc{font-weight:800;font-variant-numeric:tabular-nums;font-size:15px;width:40px;text-align:right;flex:0 0 auto}
+  .sc.sg{color:var(--green)}.sc.sy{color:var(--amber)}.sc.sr{color:var(--red)}
+  .gh .tm .fin{color:#fff;font-weight:800;margin:0 8px;font-variant-numeric:tabular-nums}
+  .lpts{font-weight:800;font-variant-numeric:tabular-nums;font-size:12px;width:30px;text-align:right;flex:0 0 auto}
+  .lpts.sg{color:var(--green)}.lpts.sy{color:var(--amber)}.lpts.sr{color:var(--faint)}
+  /* empty */
+  .blank{padding:30px 18px;text-align:center;color:var(--faint);font-size:13.5px;line-height:1.6}
+  .blank .e{font-size:26px;display:block;margin-bottom:8px}
+  footer{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);color:var(--faint);font-size:11.5px;text-align:center;line-height:1.7}footer a{color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="brand"><span class="z">P</span>Padellen · WC&nbsp;2026</div>
+    <a class="spz" href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza ↗</a>
+  </div>
+  <div class="lead"><h1>Padellen Zonder Ballen 🎾⚽</h1><p id="sub"></p></div>
+
+  <div class="tabs">
+    <button class="on" data-p="leaderboard">Leaderboard</button>
+    <button data-p="trend">Trend</button>
+    <button data-p="last">Last</button>
+    <button data-p="next">Next</button>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="panel on" id="leaderboard">
+    <div class="card sop">
+      <div class="part"><div class="hd">⏮ What you missed</div><p id="missed"></p></div>
+      <div class="part"><div class="hd up">⏭ Upcoming</div><p id="upcoming"></p></div>
+    </div>
+    <div class="lbl">Standings</div>
+    <div class="card tbl">
+      <div class="tr th">
+        <div class="rk">#</div><div>Player</div>
+        <div class="c g">✓✓✓</div><div class="c b">✓✓</div><div class="c a">✓</div><div class="c x">✗</div>
+        <div class="c" style="color:var(--dim)">Pts</div><div class="c" style="color:var(--dim)">+/−</div>
+      </div>
+      <div id="rows"></div>
+    </div>
+    <div class="legend">
+      <span class="lgi"><b class="g">✓✓✓</b> exact score · 10 pts</span>
+      <span class="lgi"><b class="b">✓✓</b> goal difference · 7 pts</span>
+      <span class="lgi"><b class="a">✓</b> winner · 5 pts</span>
+      <span class="lgi"><b class="x">✗</b> miss · 1 pt</span>
+      <span class="lgi"><b>+/−</b> places vs last match</span>
+    </div>
+  </div>
+
+  <!-- TREND -->
+  <div class="panel" id="trend">
+    <div class="lbl">Points by matchday</div>
+    <div class="card chart"><div class="empty">📈 The lines appear once the first matches are played.<br>Each player gets their own colour.</div></div>
+  </div>
+
+  <!-- LAST -->
+  <div class="panel" id="last">
+    <div class="lbl">Last matches · result + everyone's score</div>
+    <div class="card" id="lastgames"></div>
+  </div>
+
+  <!-- NEXT -->
+  <div class="panel" id="next">
+    <div class="lbl">Next matches</div>
+    <div class="note">
+      <span class="k">📊 <b>Bar</b> = bookmaker win / draw / lose odds</span><br>
+      <span style="display:inline-block;margin-top:6px">Each pick: <b class="g">🟢 backs the favourite</b> · <b class="a">🟡 draw</b> · <b class="x">🔴 backs the underdog</b></span>
+    </div>
+    <div class="card" id="games"></div>
+  </div>
+
+  <footer>
+    Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
+    Odds: bookmaker consensus (bet365 / FanDuel) · flags flagcdn.com · updated 12/06
+  </footer>
+</div>
+
+<script>
+// [name, exact, gd, winner, miss, points]
+const STAND=[
+ ["DB",2,0,0,0,20],["Mahir Bikhan",2,0,0,0,20],
+ ["David J",1,0,0,1,11],
+ ["MichaelVH",0,0,1,1,6],["Roll-up United",0,0,1,1,6],
+ ["Mark VA",0,0,0,2,2],["Ngoy naar de titel!",0,0,0,2,2],["the one and only",0,0,0,2,2]
+];
+const PREV={};
+// home, homeISO, away, awayISO, when, pH, pD, pA, picks
+const NEXT=[
+ ["Canada","ca","Bosnia & Herzegovina","ba","12/06 21:00",54,24,22,"Mark VA 0-1 · MichaelVH 1-0 · DB 1-1 · Roll-up United 1-0 · David J 2-0 · Ngoy naar de titel! 0-0 · Mahir Bikhan 0-0 · the one and only 2-1"],
+ ["United States","us","Paraguay","py","13/06 03:00",50,27,23,"Mark VA 3-3 · MichaelVH 1-3 · DB 1-0 · Roll-up United 1-0 · David J 2-1 · Ngoy naar de titel! 1-0 · Mahir Bikhan 0-2"],
+ ["Qatar","qa","Switzerland","ch","13/06 21:00",7,15,78,"Mark VA 0-2 · MichaelVH 0-5 · DB 0-3 · Roll-up United 0-2 · David J 0-3 · Ngoy naar de titel! 0-2 · Mahir Bikhan 0-2"],
+ ["Brazil","br","Morocco","ma","14/06 00:00",54,25,21,"Mark VA 2-1 · MichaelVH 3-2 · DB 2-1 · Roll-up United 1-0 · David J 3-1 · Ngoy naar de titel! 2-0 · Mahir Bikhan 2-1"]
+];
+// home, homeISO, away, awayISO, when, homeScore, awayScore, "Name h-a|pts · ..."
+const LAST=[
+ ["South Korea","kr","Czechia","cz","12/06",2,1,"DB 2-1|10 · Mahir Bikhan 2-1|10 · Mark VA 1-1|1 · MichaelVH 2-2|1 · Roll-up United 1-1|1 · David J 1-1|1 · Ngoy naar de titel! 2-2|1 · the one and only 1-1|1"],
+ ["Mexico","mx","South Africa","za","11/06",2,0,"DB 2-0|10 · David J 2-0|10 · Mahir Bikhan 2-0|10 · MichaelVH 3-0|5 · Roll-up United 1-0|5 · Mark VA 0-0|1 · Ngoy naar de titel! 2-2|1 · the one and only 0-0|1"]
+];
+
+function hue(n){let h=0;for(let i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))%360;return h;}
+function col(n){return `hsl(${hue(n)} 60% 60%)`;}
+function ini(n){const p=n.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/);return ((p[0]||'?')[0]+(p[1]?p[1][0]:(p[0]||'??')[1]||'')).toUpperCase();}
+function flag(iso){return `<img class="fl" src="https://flagcdn.com/h20/${iso}.png" alt="" onerror="this.style.display='none'">`;}
+function out(s){const [h,a]=s.split('-').map(Number);return h>a?'H':h<a?'A':'D';}
+function scClass(s,fav){const o=out(s);return o==='D'?'sy':(o===fav?'sg':'sr');}
+
+// subtitle
+function sub(){document.getElementById('sub').textContent=`Matchday 1 underway · 2 of 72 group games played · ${STAND.length} players`;}
+sub();
+
+document.getElementById('missed').innerHTML=
+ `<b>Mexico 2–0 South Africa</b> went to script — three players nailed the exact score (DB, David J, Mahir Bikhan, +10 each). `+
+ `<b>South Korea 2–1 Czechia</b> caught most of the field out, but <b>DB</b> and <b>Mahir Bikhan</b> called it exactly again — back-to-back 20s, a flawless start, two clear at the top. `+
+ `Roll-up United and MichaelVH sit mid-pack on 6. Mark VA, Ngoy and "the one and only" each played three draws and trail on 2.`;
+document.getElementById('upcoming').innerHTML=
+ `<b>Canada – Bosnia</b> (54/24/22) tonight, then <b>USA – Paraguay</b> and <b>Brazil – Morocco</b>. `+
+ `<b>Switzerland</b> at Qatar (78%) is the round's banker — everyone backs the Swiss, so only an exact rout moves the table (MichaelVH's gone bold on 0-5). `+
+ `Watch DB and Mahir Bikhan: if either keeps nailing scorelines, this is already a two-horse race.`;
+
+// standings
+const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));
+document.getElementById('rows').innerHTML=ranked.map((p,i)=>{
+  const [nm,e,g,w,x,pt]=p;
+  let dl='<span class="dl">–</span>';
+  if(PREV[nm]!=null){const d=PREV[nm]-(i+1);dl=d>0?`<span class="dl up">▲${d}</span>`:d<0?`<span class="dl dn">▼${-d}</span>`:'<span class="dl">–</span>';}
+  const cell=(v,c)=>`<div class="c ${v?c:'z'}">${v}</div>`;
+  return `<div class="tr"><div class="rk">${i+1}</div><div class="nm">${nm}</div>
+    ${cell(e,'g')}${cell(g,'b')}${cell(w,'a')}${cell(x,'x')}
+    <div class="pt">${pt}</div>${dl}</div>`;
+}).join('');
+
+// next matches
+document.getElementById('games').innerHTML=NEXT.map(m=>{
+  const [home,hiso,away,aiso,when,pH,pD,pA,picksStr]=m;
+  const fav = pH>=pA?'H':'A';
+  const picks=picksStr.split(' · ').filter(Boolean).map(p=>{const x=p.match(/^(.*)\s(\d+-\d+)$/);return [x[1],x[2]];});
+  const sorted=[...picks].sort((a,b)=>{const ma=a[1].split('-').map(Number),mb=b[1].split('-').map(Number);return (mb[0]-mb[1])-(ma[0]-ma[1])||b[1].localeCompare(a[1]);});
+  const rows=sorted.map(([nm,sc])=>`<div class="pr"><span class="av" style="background:${col(nm)}">${ini(nm)}</span><span class="n">${nm}</span><span class="sc ${scClass(sc,fav)}">${sc}</span></div>`).join('');
+  return `<div class="game">
+    <div class="gh"><div class="tm">${flag(hiso)} ${home}<span class="vs">–</span>${flag(aiso)} ${away}</div><div class="wh">${when}</div></div>
+    <div class="odds"><div class="obar"><i class="h" style="width:${pH}%"></i><i class="d" style="width:${pD}%"></i><i class="a" style="width:${pA}%"></i></div>
+      <div class="olab"><span>${home} ${pH}%</span><span class="mid">Draw ${pD}%</span><span>${away} ${pA}%</span></div></div>
+    <div class="picks">${rows}</div>
+  </div>`;
+}).join('');
+
+// last matches — result + everyone's pick + points
+function ptsCls(p){return p>=7?'sg':p===5?'sy':'sr';}
+document.getElementById('lastgames').innerHTML=LAST.map(m=>{
+  const [home,hiso,away,aiso,when,hs,as,picksStr]=m;
+  const picks=picksStr.split(' · ').filter(Boolean).map(p=>{const x=p.match(/^(.*)\s(\d+-\d+)\|(\d+)$/);return [x[1],x[2],+x[3]];});
+  const rows=picks.map(([nm,sc,pt])=>`<div class="pr"><span class="av" style="background:${col(nm)}">${ini(nm)}</span><span class="n">${nm}</span><span class="sc ${ptsCls(pt)}">${sc}</span><span class="lpts ${ptsCls(pt)}">+${pt}</span></div>`).join('');
+  return `<div class="game">
+    <div class="gh"><div class="tm">${flag(hiso)} ${home}<span class="fin">${hs}–${as}</span>${flag(aiso)} ${away}</div><div class="wh">${when} · FT</div></div>
+    <div class="picks">${rows}</div>
+  </div>`;
+}).join('');
+
+// tabs
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id===b.dataset.p));
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>

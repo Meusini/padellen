@@ -58,6 +58,17 @@
   /* chart */
   .chart{padding:16px}.chart .empty{height:200px;display:grid;place-items:center;color:var(--faint);font-size:13px;text-align:center;border:1px dashed var(--line);border-radius:12px}
   .trendcap{font-size:12px;color:var(--faint);margin:11px 4px 0;line-height:1.5}
+  .trendwrap{position:relative}
+  .tt-sw{width:8px;height:8px;border-radius:2px;flex:0 0 auto;display:inline-block}
+  .ttip{position:absolute;pointer-events:none;z-index:6;background:#0d1017;border:1px solid var(--line2);border-radius:9px;padding:7px 9px;font-size:12px;color:var(--txt);box-shadow:0 10px 24px -10px rgba(0,0,0,.85);max-width:215px;opacity:0;transition:opacity .12s;transform:translate(-50%,-118%)}
+  .ttip.on{opacity:1}
+  .ttip.below{transform:translate(-50%,16px)}
+  .ttip .tt-h{font-size:10px;color:var(--dim);margin-bottom:5px;font-weight:700}
+  .ttip .tt-r{display:flex;align-items:center;gap:6px;white-space:nowrap;line-height:1.65}
+  .ttip .tt-n{flex:1;overflow:hidden;text-overflow:ellipsis;max-width:98px}
+  .ttip .tt-sc{color:var(--dim);font-variant-numeric:tabular-nums}
+  .ttip .tt-p{font-weight:800;font-variant-numeric:tabular-nums}
+  .tleg .lgi{cursor:default}
   /* matches */
   .note{font-size:12.5px;color:var(--dim);background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:13px;line-height:1.5}
   .note .k{display:inline-flex;align-items:center;gap:5px;margin-right:9px;white-space:nowrap}
@@ -240,29 +251,55 @@ document.getElementById('lastgames').innerHTML=LAST.map(m=>{
   </div>`;
 }).join('');
 
-// trend — cumulative points by game (derived from LAST, chronological)
+// trend — interactive cumulative points by game (derived from LAST)
 function renderTrend(){
   const host=document.getElementById('trendchart'); if(!host) return;
-  const games=[...LAST].reverse();
-  if(!games.length){host.innerHTML='<div class="empty">📈 Lines appear once matches are played.</div>';return;}
-  const perGame=games.map(m=>{const mp={};m[7].split(' · ').filter(Boolean).forEach(s=>{const x=s.match(/^(.*)\s(\d+-\d+)\|(\d+)$/);if(x)mp[x[1]]=+x[3];});return mp;});
-  const series=STAND.map(r=>r[0]).map(nm=>{let c=0;const arr=[0];perGame.forEach(g=>{c+=(g[nm]||0);arr.push(c);});return {nm,arr,total:arr[arr.length-1]};});
+  const raw=[...LAST].reverse();
+  if(!raw.length){host.innerHTML='<div class="empty">📈 Lines appear once matches are played.</div>';return;}
+  const games=raw.map(m=>{const mp={};m[7].split(' · ').filter(Boolean).forEach(s=>{const x=s.match(/^(.*)\s(\d+-\d+)\|(\d+)$/);if(x)mp[x[1]]={sc:x[2],pts:+x[3]};});return {home:m[0],away:m[2],res:m[5]+'-'+m[6],picks:mp};});
+  const series=STAND.map(r=>r[0]).map(nm=>{let c=0;const arr=[0];games.forEach(g=>{c+=((g.picks[nm]||{}).pts||0);arr.push(c);});return {nm,arr,total:arr[arr.length-1],color:col(nm)};});
   series.sort((a,b)=>b.total-a.total||a.nm.localeCompare(b.nm));
-  const K=series.length<=6?series.length:5, top=new Set(series.slice(0,K).map(s=>s.nm));
   const n=games.length, maxY=Math.max(10,Math.ceil(Math.max(...series.map(s=>s.total))/5)*5);
-  const W=320,H=190,pl=24,pr=12,pT=12,pB=26;
+  const lead=new Set(series.slice(0,3).map(s=>s.nm));
+  const W=320,H=190,pl=24,pr=14,pT=12,pB=26;
   const X=i=>pl+(W-pl-pr)*(n?i/n:0), Y=v=>pT+(H-pT-pB)*(1-v/maxY);
-  let g='';
-  [0,maxY/2,maxY].forEach(v=>{const yy=Y(v);g+=`<line x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}" stroke="var(--line)"/><text x="${pl-5}" y="${yy+3}" text-anchor="end" font-size="9" fill="var(--faint)">${v}</text>`;});
-  for(let i=1;i<=n;i++)g+=`<text x="${X(i)}" y="${H-12}" text-anchor="middle" font-size="9" fill="var(--faint)">${i}</text>`;
-  g+=`<text x="${(pl+W-pr)/2}" y="${H-2}" text-anchor="middle" font-size="8.5" fill="var(--faint)">games played →</text>`;
-  let dim='',hot='';
-  series.forEach(s=>{const p=s.arr.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
-    if(top.has(s.nm)){const c=col(s.nm);hot+=`<polyline points="${p}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${X(n)}" cy="${Y(s.total)}" r="2.7" fill="${c}"/>`;}
-    else dim+=`<polyline points="${p}" fill="none" stroke="var(--line2)" stroke-width="1.2" opacity=".45" stroke-linejoin="round"/>`;});
-  host.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">${g}${dim}${hot}</svg>`+
-    `<div class="legend" style="margin-top:12px">`+series.slice(0,K).map(s=>`<span class="lgi"><span style="width:9px;height:9px;border-radius:2px;background:${col(s.nm)};display:inline-block"></span>${s.nm} · <b>${s.total}</b></span>`).join('')+`</div>`;
-  const cap=document.getElementById('trendcap'); if(cap) cap.textContent=n<3?`Only ${n} game${n>1?'s':''} in — the field's still bunched; lines fan out as the tournament runs.`:'';
+  let grid='';
+  [0,maxY/2,maxY].forEach(v=>{const yy=Y(v);grid+=`<line x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}" stroke="var(--line)"/><text x="${pl-5}" y="${yy+3}" text-anchor="end" font-size="9" fill="var(--faint)">${v}</text>`;});
+  for(let i=1;i<=n;i++)grid+=`<text x="${X(i)}" y="${H-12}" text-anchor="middle" font-size="9" fill="var(--faint)">${i}</text>`;
+  grid+=`<text x="${(pl+W-pr)/2}" y="${H-2}" text-anchor="middle" font-size="8.5" fill="var(--faint)">games played →</text>`;
+  let lines='';
+  series.forEach((s,idx)=>{const p=s.arr.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');const L=lead.has(s.nm);lines+=`<polyline data-i="${idx}" points="${p}" fill="none" stroke="${s.color}" stroke-width="${L?2.4:1.5}" stroke-linejoin="round" stroke-linecap="round" opacity="${L?1:.46}"/>`;});
+  let dots='';
+  series.forEach(s=>{if(lead.has(s.nm))dots+=`<circle cx="${X(n)}" cy="${Y(s.total)}" r="2.7" fill="${s.color}"/>`;});
+  const svg=`<svg id="tsvg" viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block"><line id="tg" x1="0" y1="${pT}" x2="0" y2="${H-pB}" stroke="var(--line2)" opacity="0"/>${grid}${lines}${dots}<g id="tm"></g><rect id="thit" x="${pl}" y="${pT}" width="${W-pl-pr}" height="${H-pT-pB}" fill="transparent" style="cursor:crosshair"/></svg>`;
+  const legend=`<div class="legend tleg" style="margin-top:12px">`+series.map((s,idx)=>`<span class="lgi" data-i="${idx}"><span class="tt-sw" style="background:${s.color}"></span>${s.nm} · <b>${s.total}</b></span>`).join('')+`</div>`;
+  host.innerHTML=`<div class="trendwrap">${svg}<div class="ttip" id="ttip"></div></div>${legend}`;
+  const cap=document.getElementById('trendcap'); if(cap) cap.textContent=(n<3?`Only ${n} game${n>1?'s':''} in — the field's still bunched. `:'')+'Hover or tap a line to see each player’s pick and points.';
+  const svgEl=document.getElementById('tsvg'),hit=document.getElementById('thit'),tip=document.getElementById('ttip'),guide=document.getElementById('tg'),tm=document.getElementById('tm'),wrap=host.querySelector('.trendwrap');
+  const polys=[...svgEl.querySelectorAll('polyline')];
+  const pcol=p=>p>=7?'var(--green)':p===5?'var(--amber)':'var(--faint)';
+  function hl(setv){polys.forEach(p2=>{const i=+p2.dataset.i,on=setv&&setv.has(i),L=lead.has(series[i].nm);p2.setAttribute('opacity',setv?(on?1:.1):(L?1:.46));p2.setAttribute('stroke-width',on?2.9:(L?2.4:1.5));});}
+  function show(cx,cy){
+    const sp=svgEl.createSVGPoint();sp.x=cx;sp.y=cy;const ctm=svgEl.getScreenCTM();if(!ctm)return;const loc=sp.matrixTransform(ctm.inverse());
+    const g=Math.max(1,Math.min(n,Math.round((loc.x-pl)/((W-pl-pr)/n))));
+    let best=0,bd=1e9;series.forEach((s,i)=>{const d=Math.abs(Y(s.arr[g])-loc.y);if(d<bd){bd=d;best=i;}});
+    const val=series[best].arr[g];
+    const grp=series.map((s,i)=>i).filter(i=>series[i].arr[g]===val).sort((a,b)=>series[a].nm.localeCompare(series[b].nm));
+    hl(new Set(grp));
+    guide.setAttribute('x1',X(g));guide.setAttribute('x2',X(g));guide.setAttribute('opacity','.55');
+    tm.innerHTML=`<circle cx="${X(g)}" cy="${Y(val)}" r="3.6" fill="${series[best].color}" stroke="#0b0d12" stroke-width="1.2"/>`;
+    const gm=games[g-1];
+    const rows=grp.map(i=>{const pk=gm.picks[series[i].nm]||{};return `<div class="tt-r"><span class="tt-sw" style="background:${series[i].color}"></span><span class="tt-n">${series[i].nm}</span><span class="tt-sc">${pk.sc||'—'}</span><span class="tt-p" style="color:${pcol(pk.pts||0)}">+${pk.pts||0}</span></div>`;}).join('');
+    tip.innerHTML=`<div class="tt-h">After game ${g} · ${gm.home} ${gm.res} ${gm.away} — ${val} pts</div>${rows}`;
+    const r=wrap.getBoundingClientRect();let tx=cx-r.left,ty=cy-r.top;tip.classList.toggle('below',ty<76);tip.classList.add('on');const tw=tip.offsetWidth;tip.style.left=Math.max(tw/2+4,Math.min(r.width-tw/2-4,tx))+'px';tip.style.top=ty+'px';
+  }
+  function hide(){tip.classList.remove('on');guide.setAttribute('opacity','0');tm.innerHTML='';hl(null);}
+  hit.addEventListener('mousemove',e=>show(e.clientX,e.clientY));
+  hit.addEventListener('mouseleave',hide);
+  hit.addEventListener('touchstart',e=>{const t=e.touches[0];show(t.clientX,t.clientY);},{passive:true});
+  hit.addEventListener('touchmove',e=>{const t=e.touches[0];show(t.clientX,t.clientY);e.preventDefault();},{passive:false});
+  hit.addEventListener('touchend',hide);
+  host.querySelectorAll('.tleg .lgi').forEach(el=>{const i=+el.dataset.i;el.addEventListener('mouseenter',()=>hl(new Set([i])));el.addEventListener('mouseleave',()=>hl(null));});
 }
 renderTrend();
 

@@ -235,9 +235,9 @@ function sub(){document.getElementById('sub').textContent=`Matchday 1 underway �
 sub();
 
 document.getElementById('missed').innerHTML=
- `<b>DB is running away with it</b> — top on 35 after nailing <b>Canada 1–1</b> (+10) and backing the US win. <b>USA 4–1 Paraguay</b>: no exact calls; David J, DB, Ngoy and Roll-up United took the US winner. On the Canada draw, only <b>DB</b> had the exact 1-1, with <b>Ngoy</b> catching the goal difference. Mahir Bikhan (22) and David J (17) give chase.`;
+ `<b>DB has gone supernova</b> — three exact scorelines in four games for <b>35</b>, lapping the group. The comedy's right behind him: <b>Mahir</b> had Canada 0-0 (worth 7), edited it to 1-0 — it's in the Changes tab — and watched it finish 1-1. Six points, gone. <b>Ngoy</b> held the same 0-0, banked the 7, and that's how 'Ngoy naar de titel' is 4th on 14. <b>Mark VA</b> has called four draws including a 3-3, the human white flag, bottom-but-one on 4 — just above <b>'the one and only'</b>, who filled three games and vanished.`;
 document.getElementById('upcoming').innerHTML=
- `<b>Qatar–Switzerland</b> tonight is unanimous — all seven back the Swiss (78%). Then <b>Brazil–Morocco</b>, <b>Haiti–Scotland</b> and <b>Australia–Turkey</b>. With DB 13 clear, the rest are playing for second unless he slips.`;
+ `<b>Qatar–Switzerland</b> is a freebie — all seven back the Swiss (78%), so it shifts nothing unless someone calls the exact rout. Cue <b>MichaelVH and his 0-5</b>, predicting football like it's FIFA on rookie. The one that counts is <b>Brazil–Morocco</b> (54% Brazil): nail the exact and you make a dent — fluff it and DB drifts further out of sight.`;
 
 // standings
 const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));
@@ -333,6 +333,7 @@ renderTrend();
 // changes — recent prediction activity. CHANGES = [player, gameNo, home, away, before, after, isoTime]; before=null = first log/added, set = edited.
 const CHANGES=[
  ["DB",25,"Tsjechië","Zuid-Afrika","1-1","2-0","2026-06-12T21:12"],
+ ["Mahir Bikhan",3,"Canada","Bosnië en Herzegovina","0-0","1-0","2026-06-12T14:19"],
  ["Mahir Bikhan",4,"Verenigde Staten","Paraguay",null,"1-1","2026-06-12T08:18"],
  ["MichaelVH",24,"Oezbekistan","Colombia",null,"0-2","2026-06-11T20:20"],
  ["MichaelVH",23,"Ghana","Panama",null,"3-3","2026-06-11T20:19"],

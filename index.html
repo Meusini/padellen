@@ -191,32 +191,36 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Odds: bookmaker consensus (bet365 / FanDuel) · flags flagcdn.com · updated 13/06 10:32
+    Odds: bookmaker consensus (bet365 / FanDuel) · flags flagcdn.com · updated 14/06 07:16
   </footer>
 </div>
 
 <script>
 // [name, exact, gd, winner, miss, points]
 const STAND=[
- ["Mark VA",0,0,0,4,4],
- ["MichaelVH",0,0,1,3,8],
- ["DB",3,0,1,0,35],
- ["Roll-up United",0,0,2,2,12],
- ["David J",1,0,1,2,17],
- ["Ngoy naar de titel!",0,1,1,2,14],
- ["Mahir Bikhan ",2,0,0,2,22],
+ ["Mark VA",0,0,1,7,12],
+ ["MichaelVH",0,0,2,6,16],
+ ["DB",4,0,1,3,48],
+ ["Roll-up United",1,0,2,5,25],
+ ["David J",1,1,2,4,31],
+ ["Ngoy naar de titel!",0,1,2,5,22],
+ ["Mahir Bikhan ",2,0,1,5,30],
  ["the one and only",0,0,0,3,3]
 ];
-const PREV={"DB":1,"Mahir Bikhan":2,"David J":3,"MichaelVH":4,"Roll-up United":5,"Mark VA":6,"Ngoy naar de titel!":7,"the one and only":8};
+const PREV={"DB":1,"Mahir Bikhan ":2,"David J":3,"Ngoy naar de titel!":4,"Roll-up United":5,"MichaelVH":6,"Mark VA":7,"the one and only":8};
 // home, homeISO, away, awayISO, when, pH, pD, pA, picks
 const NEXT=[
- ["Qatar","qa","Switzerland","ch","13/06 21:00",7,15,78,"Mark VA 0-2 · MichaelVH 0-5 · DB 0-3 · David J 0-3 · Ngoy naar de titel! 0-2 · Mahir Bikhan  0-2 · Roll-up United 0-2"],
- ["Brazil","br","Morocco","ma","14/06 00:00",54,25,21,"Mark VA 2-1 · MichaelVH 3-2 · DB 2-1 · David J 3-1 · Ngoy naar de titel! 2-0 · Mahir Bikhan  2-1 · Roll-up United 1-0"],
- ["Haiti","ht","Scotland","gb-sct","14/06 03:00",14,23,63,"Mark VA 0-2 · MichaelVH 0-3 · DB 0-1 · David J 1-2 · Ngoy naar de titel! 0-2 · Mahir Bikhan  0-2 · Roll-up United 0-1"],
- ["Australia","au","Turkey","tr","14/06 06:00",31,27,42,"Mark VA 0-2 · MichaelVH 1-1 · DB 1-2 · David J 2-1 · Ngoy naar de titel! 0-1 · Mahir Bikhan  0-2 · Roll-up United 0-1"]
+ ["Duitsland","de","Curaçao","cw","14/06 19:00",88,8,4,"Mark VA 5-0 · MichaelVH 5-0 · DB 4-0 · David J 4-0 · Ngoy naar de titel! 4-0 · Mahir Bikhan  3-0 · Roll-up United 3-0"],
+ ["Nederland","nl","Japan","jp","14/06 22:00",50,26,24,"Mark VA 1-0 · MichaelVH 1-2 · DB 0-0 · David J 2-1 · Ngoy naar de titel! 1-2 · Mahir Bikhan  2-1 · Roll-up United 1-0"],
+ ["Ivoorkust","ci","Ecuador","ec","15/06 01:00",45,27,28,"Mark VA 2-3 · MichaelVH 0-1 · DB 1-1 · David J 1-2 · Ngoy naar de titel! 2-2 · Mahir Bikhan  2-2 · Roll-up United 0-1"],
+ ["Zweden","se","Tunesië","tn","15/06 04:00",56,26,18,"Mark VA 0-1 · MichaelVH 1-1 · DB 3-1 · David J 3-1 · Ngoy naar de titel! 1-0 · Mahir Bikhan  3-0 · Roll-up United 1-0"]
 ];
 // home, homeISO, away, awayISO, when, homeScore, awayScore, "Name h-a|pts · ..."
 const LAST=[
+ ["Australië","au","Turkije","tr","14/06",2,0,"David J 2-1|5 · DB 1-2|1 · Mahir Bikhan  0-2|1 · Mark VA 0-2|1 · MichaelVH 1-1|1 · Ngoy naar de titel! 0-1|1 · Roll-up United 0-1|1"],
+ ["Haïti","ht","Schotland","gb-sct","14/06",0,1,"DB 0-1|10 · Roll-up United 0-1|10 · David J 1-2|7 · Mahir Bikhan  0-2|5 · Mark VA 0-2|5 · MichaelVH 0-3|5 · Ngoy naar de titel! 0-2|5"],
+ ["Brazilië","br","Marokko","ma","14/06",1,1,"DB 2-1|1 · David J 3-1|1 · Mahir Bikhan  2-1|1 · Mark VA 2-1|1 · MichaelVH 3-2|1 · Ngoy naar de titel! 2-0|1 · Roll-up United 1-0|1"],
+ ["Qatar","qa","Zwitserland","ch","13/06",1,1,"DB 0-3|1 · David J 0-3|1 · Mahir Bikhan  0-2|1 · Mark VA 0-2|1 · MichaelVH 0-5|1 · Ngoy naar de titel! 0-2|1 · Roll-up United 0-2|1"],
  ["United States","us","Paraguay","py","13/06",4,1,"David J 2-1|5 · DB 1-0|5 · Ngoy naar de titel! 1-0|5 · Roll-up United 1-0|5 · Mahir Bikhan  1-1|1 · Mark VA 2-2|1 · MichaelVH 1-3|1"],
  ["Canada","ca","Bosnia & Herzegovina","ba","12/06",1,1,"DB 1-1|10 · Ngoy naar de titel! 0-0|7 · David J 2-0|1 · Mahir Bikhan  1-0|1 · Mark VA 0-1|1 · MichaelVH 1-0|1 · Roll-up United 1-0|1 · the one and only 2-1|1"],
  ["South Korea","kr","Czechia","cz","12/06",2,1,"DB 2-1|10 · Mahir Bikhan  2-1|10 · David J 1-1|1 · Mark VA 1-1|1 · MichaelVH 2-2|1 · Ngoy naar de titel! 2-2|1 · Roll-up United 1-1|1 · the one and only 1-1|1"],
@@ -231,13 +235,13 @@ function out(s){const [h,a]=s.split('-').map(Number);return h>a?'H':h<a?'A':'D';
 function scClass(s,fav){const o=out(s);return o==='D'?'sy':(o===fav?'sg':'sr');}
 
 // subtitle
-function sub(){document.getElementById('sub').textContent=`Matchday 1 underway · 4 of 72 group games played · ${STAND.length} players`;}
+function sub(){document.getElementById('sub').textContent=`Matchday 1 · 8 of 72 group games played · ${STAND.length} players`;}
 sub();
 
 document.getElementById('missed').innerHTML=
- `<b>DB has gone supernova</b> — three exact scorelines in four games for <b>35</b>, lapping the group. The comedy's right behind him: <b>Mahir</b> had Canada 0-0 (worth 7), edited it to 1-0 — it's in the Changes tab — and watched it finish 1-1. Six points, gone. <b>Ngoy</b> held the same 0-0, banked the 7, and that's how 'Ngoy naar de titel' is 4th on 14. <b>Mark VA</b> has called four draws including a 3-3, the human white flag, bottom-but-one on 4 — just above <b>'the one and only'</b>, who filled three games and vanished.`;
+ `<b>DB is in a different postcode</b> — 48 points, four exact scorelines in 8 games, 17 clear of David J (31). Nobody else is even in the same conversation. The Haiti exact (0-1 Scotland) was pure. <b>David J</b> climbed to 2nd: GD on Haiti (+7) and a winner on Australia (+5) closed the gap on Mahir. <b>Mahir</b> drops to 3rd — solid but no exact since Korea. <b>The one and only</b> has 3 points and apparently filed for retirement.`;
 document.getElementById('upcoming').innerHTML=
- `<b>Qatar–Switzerland</b> is a freebie — all seven back the Swiss (78%), so it shifts nothing unless someone calls the exact rout. Cue <b>MichaelVH and his 0-5</b>, predicting football like it's FIFA on rookie. The one that counts is <b>Brazil–Morocco</b> (54% Brazil): nail the exact and you make a dent — fluff it and DB drifts further out of sight.`;
+ `<b>Germany vs Curaçao</b>: everyone on Germany — MichaelVH and Mark VA both went 5-0, DB sensibly went 4-0. The gap opens on whoever doesn't pick right. <b>Netherlands–Japan</b>: DB went 0-0 (a draw, classic DB contrarian), Ngoy went 1-2 for Japan. If DB nails this one it's basically over — 17pts clear and a potentially exact drawn match.`;
 
 // standings
 const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));

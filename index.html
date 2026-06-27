@@ -191,34 +191,40 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 26/06 16:05
+    Flags via flagcdn.com · updated 27/06 08:05
   </footer>
 </div>
 
 <script>
 // [name, exact, gd, winner, miss, points]
 const STAND=[
- ["DB",10,6,17,27,254],
- ["Mahir Bikhan",9,4,21,26,249],
- ["Roll-up United",8,5,20,27,242],
- ["Ngoy naar de titel!",8,5,20,26,241],
- ["Bart C",7,7,19,27,241],
- ["David J",3,6,23,28,215],
- ["MichaelVH",2,8,20,26,202],
- ["Mark VA",4,5,16,35,190],
+ ["Ngoy naar de titel!",10,6,23,26,283],
+ ["DB",10,7,20,29,278],
+ ["Mahir Bikhan",10,4,24,28,276],
+ ["Roll-up United",8,6,24,28,270],
+ ["Bart C",7,8,22,29,265],
+ ["MichaelVH",2,10,24,26,236],
+ ["David J",3,6,25,32,229],
+ ["Mark VA",6,5,19,36,226],
  ["the one and only",0,0,0,3,3]
 ];
-const PREV={"DB":1,"Roll-up United":2,"Bart C":3,"Mahir Bikhan":4,"Ngoy naar de titel!":5,"David J":6,"MichaelVH":7,"Mark VA":8,"the one and only":9};
-const PREVAT=60;
+const PREV={"DB":1,"Mahir Bikhan":2,"Roll-up United":3,"Ngoy naar de titel!":4,"Bart C":5,"David J":6,"MichaelVH":7,"Mark VA":8,"the one and only":9};
+const PREVAT=66;
 // home, homeISO, away, awayISO, when, pH, pD, pA, picks
 const NEXT=[
- ["Noorwegen","no","Frankrijk","fr","26/06 21:00",null,null,null,"Mark VA 0-1 · DB 1-2 · Roll-up United 0-1 · David J 1-1 · Ngoy naar de titel! 1-2 · Mahir Bikhan 1-1 · Bart C 0-1"],
- ["Senegal","sn","Irak","iq","26/06 21:00",null,null,null,"Mark VA 4-0 · DB 3-0 · Roll-up United 2-1 · David J 3-1 · Ngoy naar de titel! 1-0 · Mahir Bikhan 2-0 · Bart C 2-0"],
- ["Uruguay","uy","Spanje","es","27/06 02:00",null,null,null,"Mark VA 0-1 · DB 1-2 · Roll-up United 0-2 · David J 1-1 · Ngoy naar de titel! 1-3 · Mahir Bikhan 0-2 · Bart C 1-2"],
- ["Kaapverdië","cv","Saudi-Arabië","sa","27/06 02:00",null,null,null,"Mark VA 0-2 · DB 0-1 · Roll-up United 1-1 · David J 1-2 · Ngoy naar de titel! 0-0 · Mahir Bikhan 1-0 · Bart C 2-0"]
+ ["Panama","pa","Engeland","gb-eng","27/06 23:00",null,null,null,"Mark VA 0-3 · MichaelVH 1-5 · DB 0-3 · Roll-up United 0-2 · David J 1-2 · Ngoy naar de titel! 0-3 · Mahir Bikhan 0-2 · Bart C 0-3"],
+ ["Kroatië","hr","Ghana","gh","27/06 23:00",null,null,null,"Mark VA 3-0 · MichaelVH 0-0 · DB 1-0 · Roll-up United 1-0 · David J 0-1 · Ngoy naar de titel! 1-1 · Mahir Bikhan 2-0 · Bart C 2-0"],
+ ["DR Congo","cd","Oezbekistan","uz","28/06 01:30",null,null,null,"Mark VA 3-1 · MichaelVH 1-0 · DB 1-0 · Roll-up United 1-0 · David J 1-0 · Ngoy naar de titel! 1-1 · Mahir Bikhan 2-0 · Bart C 2-1"],
+ ["Colombia","co","Portugal","pt","28/06 01:30",null,null,null,"Mark VA 0-2 · MichaelVH 0-0 · DB 1-2 · Roll-up United 1-1 · David J 2-2 · Ngoy naar de titel! 2-2 · Mahir Bikhan 1-3 · Bart C 1-1"]
 ];
 // home, homeISO, away, awayISO, when, homeScore, awayScore, "Name h-a|pts · ..."
 const LAST=[
+ ["Nieuw-Zeeland","nz","België","be","27/06",1,5,"Ngoy naar de titel! 0-4|7 · Mark VA 0-5|5 · MichaelVH 0-2|5 · DB 0-2|5 · Roll-up United 1-3|5 · David J 1-4|5 · Mahir Bikhan 0-3|5 · Bart C 0-3|5"],
+ ["Egypte","eg","Iran","ir","27/06",1,1,"Mark VA 1-1|10 · Ngoy naar de titel! 1-1|10 · Mahir Bikhan 1-1|10 · MichaelVH 0-0|7 · DB 1-0|1 · Roll-up United 1-0|1 · David J 2-0|1 · Bart C 2-0|1"],
+ ["Kaapverdië","cv","Saudi-Arabië","sa","27/06",0,0,"Ngoy naar de titel! 0-0|10 · MichaelVH 1-1|7 · Roll-up United 1-1|7 · Mark VA 0-2|1 · DB 0-1|1 · David J 1-2|1 · Mahir Bikhan 1-0|1 · Bart C 2-0|1"],
+ ["Uruguay","uy","Spanje","es","27/06",0,1,"Mark VA 0-1|10 · DB 1-2|7 · Bart C 1-2|7 · MichaelVH 0-4|5 · Roll-up United 0-2|5 · Ngoy naar de titel! 1-3|5 · Mahir Bikhan 0-2|5 · David J 1-1|1"],
+ ["Senegal","sn","Irak","iq","26/06",5,0,"Mark VA 4-0|5 · MichaelVH 3-1|5 · DB 3-0|5 · Roll-up United 2-1|5 · David J 3-1|5 · Ngoy naar de titel! 1-0|5 · Mahir Bikhan 2-0|5 · Bart C 2-0|5"],
+ ["Noorwegen","no","Frankrijk","fr","26/06",1,4,"Mark VA 0-1|5 · MichaelVH 0-1|5 · DB 1-2|5 · Roll-up United 0-1|5 · Ngoy naar de titel! 1-2|5 · Bart C 0-1|5 · David J 1-1|1 · Mahir Bikhan 1-1|1"],
  ["Paraguay","py","Australië","au","26/06",0,0,"Ngoy naar de titel! 0-0|10 · Mahir Bikhan 1-1|7 · Mark VA 0-2|1 · DB 0-1|1 · Roll-up United 0-1|1 · David J 0-1|1 · Bart C 1-2|1"],
  ["Turkije","tr","Verenigde Staten","us","26/06",3,2,"Ngoy naar de titel! 3-1|5 · Mark VA 2-2|1 · DB 1-2|1 · Roll-up United 0-1|1 · David J 2-2|1 · Mahir Bikhan 0-3|1 · Bart C 1-3|1"],
  ["Tunesië","tn","Nederland","nl","26/06",1,3,"Bart C 1-3|10 · Roll-up United 0-2|7 · Mark VA 1-2|5 · DB 0-3|5 · David J 1-2|5 · Ngoy naar de titel! 0-3|5 · Mahir Bikhan 0-4|5"],
@@ -289,13 +295,13 @@ function out(s){const [h,a]=s.split('-').map(Number);return h>a?'H':h<a?'A':'D';
 function scClass(s,fav){const o=out(s);return o==='D'?'sy':(fav==null?'':(o===fav?'sg':'sr'));}
 
 // subtitle
-function sub(){document.getElementById('sub').textContent=`Matchday 1 · 60 of 72 group games played · ${STAND.length} players`;}
+function sub(){document.getElementById('sub').textContent=`Matchday 1 · 66 of 72 group games played · ${STAND.length} players`;}
 sub();
 
 document.getElementById('missed').innerHTML=
- `Latest in: <b>Paraguay 0-0 Australië</b> — only <b>Ngoy naar de titel!</b> nailed it. <b>DB</b> tops it on <b>254</b>, 5 clear, 10 exact and ice-cold. <b>Mahir Bikhan</b> is the mover of the day — rocketed up <b>2</b> places. <b>Bart C</b> is in freefall, down <b>2</b>. And <b>the one and only</b>? Vanished — rock bottom on 3, 251 adrift. <b>Roll-up United</b> got cold feet — swapped the #65 pick 1-1 → 1-0 (Changes).`;
+ `Latest in: <b>Nieuw-Zeeland 1-5 België</b> — not a soul saw that coming. <b>Ngoy naar de titel!</b> tops it on <b>283</b>, 5 clear, 10 exact and ice-cold. And <b>the one and only</b>? Vanished — rock bottom on 3, 280 adrift.`;
 document.getElementById('upcoming').innerHTML=
- `Next up: <b>Noorwegen – Frankrijk</b>. 3 of 7 have piled onto <b>0-1</b>. <b>David J</b> is the brave one calling a draw. Then <b>Senegal–Irak</b> and <b>Uruguay–Spanje</b>. <b>DB</b> is the one to hunt down.`;
+ `Next up: <b>Panama – Engeland</b>. 4 of 8 have piled onto <b>0-3</b>. <b>MichaelVH</b> is swinging for the fences at 1-5. Then <b>Kroatië–Ghana</b> and <b>DR Congo–Oezbekistan</b>. <b>Ngoy naar de titel!</b> is the one to hunt down.`;
 
 // standings
 const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));
@@ -428,7 +434,7 @@ const CHANGES=[
  ["Bart C",40,"Nieuw-Zeeland","Egypte","0-1","0-2","2026-06-17T22:13"],
  ["Bart C",27,"Canada","Qatar","1-0","2-0","2026-06-17T22:11"]
 ];
-const SNAP={"Mark VA":{"3332947":"1-1","3332954":"0-5","3332975":"0-1","3332981":"0-1","3332982":"0-3","3332985":"1-5","3332989":"2-3","3332997":"0-2","3333013":"3-1","3333029":"3-0","3333030":"0-2","3333038":"4-0"},"DB":{"3332947":"1-0","3332954":"0-2","3332975":"1-2","3332981":"1-2","3332982":"0-3","3332985":"0-3","3332989":"0-1","3332997":"0-1","3333013":"1-0","3333029":"1-0","3333030":"1-2","3333038":"3-0"},"Roll-up United":{"3332947":"1-0","3332954":"1-3","3332975":"0-1","3332981":"0-2","3332982":"0-2","3332985":"0-3","3332989":"0-1","3332997":"1-1","3333013":"1-0","3333029":"1-0","3333030":"1-1","3333038":"2-1"},"David J":{"3332947":"2-0","3332954":"1-4","3332975":"1-1","3332981":"1-1","3332982":"1-2","3332985":"0-3","3332989":"1-2","3332997":"1-2","3333013":"1-0","3333029":"0-1","3333030":"2-2","3333038":"3-1"},"Ngoy naar de titel!":{"3332947":"1-1","3332954":"0-4","3332975":"1-2","3332981":"1-3","3332982":"0-3","3332985":"0-3","3332989":"1-2","3332997":"0-0","3333013":"1-1","3333029":"1-1","3333030":"2-2","3333038":"1-0"},"Mahir Bikhan":{"3332947":"1-1","3332954":"0-3","3332975":"1-1","3332981":"0-2","3332982":"0-2","3332985":"0-2","3332989":"0-2","3332997":"1-0","3333013":"2-0","3333029":"2-0","3333030":"1-3","3333038":"2-0"},"Bart C":{"3332947":"2-0","3332954":"0-3","3332975":"0-1","3332981":"1-2","3332982":"0-3","3332985":"0-2","3332989":"2-3","3332997":"2-0","3333013":"2-1","3333029":"2-0","3333030":"1-1","3333038":"2-0"}};
+const SNAP={"Mark VA":{"3332982":"0-3","3332985":"1-5","3332989":"2-3","3333013":"3-1","3333029":"3-0","3333030":"0-2"},"MichaelVH":{"3332982":"1-5","3332985":"0-5","3332989":"0-0","3333013":"1-0","3333029":"0-0","3333030":"0-0"},"DB":{"3332982":"0-3","3332985":"0-3","3332989":"0-1","3333013":"1-0","3333029":"1-0","3333030":"1-2"},"Roll-up United":{"3332982":"0-2","3332985":"0-3","3332989":"0-1","3333013":"1-0","3333029":"1-0","3333030":"1-1"},"David J":{"3332982":"1-2","3332985":"0-3","3332989":"1-2","3333013":"1-0","3333029":"0-1","3333030":"2-2"},"Ngoy naar de titel!":{"3332982":"0-3","3332985":"0-3","3332989":"1-2","3333013":"1-1","3333029":"1-1","3333030":"2-2"},"Mahir Bikhan":{"3332982":"0-2","3332985":"0-2","3332989":"0-2","3333013":"2-0","3333029":"2-0","3333030":"1-3"},"Bart C":{"3332982":"0-3","3332985":"0-2","3332989":"2-3","3333013":"2-1","3333029":"2-0","3333030":"1-1"}};
 function renderChanges(){
   const host=document.getElementById('changefeed'); if(!host) return;
   if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}

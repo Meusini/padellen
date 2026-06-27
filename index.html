@@ -191,7 +191,7 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 27/06 15:25
+    Flags via flagcdn.com · updated 27/06 16:09
   </footer>
 </div>
 
@@ -299,7 +299,7 @@ function sub(){document.getElementById('sub').textContent=`Matchday 1 · 66 of 7
 sub();
 
 document.getElementById('missed').innerHTML=
- `Latest in: <b>Nieuw-Zeeland 1-5 België</b> — not a soul saw that coming. <b>Ngoy naar de titel!</b> tops it on <b>283</b>, 5 clear, 10 exact and ice-cold. And <b>the one and only</b>? Vanished — rock bottom on 3, 280 adrift.`;
+ `Latest in: <b>Nieuw-Zeeland 1-5 België</b> — not a soul saw that coming. <b>Ngoy naar de titel!</b> tops it on <b>283</b>, 5 clear, 10 exact and ice-cold. And <b>the one and only</b>? Vanished — rock bottom on 3, 280 adrift. <b>Roll-up United</b> got cold feet — swapped the #71 pick 0-3 → 0-1 (Changes).`;
 document.getElementById('upcoming').innerHTML=
  `Next up: <b>Panama – Engeland</b>. 4 of 8 have piled onto <b>0-3</b>. <b>MichaelVH</b> is swinging for the fences at 1-5. Then <b>Kroatië–Ghana</b> and <b>DR Congo–Oezbekistan</b>. <b>Ngoy naar de titel!</b> is the one to hunt down.`;
 
@@ -393,6 +393,8 @@ renderTrend();
 
 // changes — recent prediction activity. CHANGES = [player, gameNo, home, away, before, after, isoTime]; before=null = first log/added, set = edited.
 const CHANGES=[
+ ["Roll-up United",71,"Jordanië","Argentinië","0-3","0-1","2026-06-27T13:33"],
+ ["Roll-up United",72,"Algerije","Oostenrijk","0-1","1-1","2026-06-27T13:33"],
  ["Roll-up United",65,"Egypte","Iran","1-1","1-0","2026-06-26T12:45"],
  ["Roll-up United",66,"Nieuw-Zeeland","België","0-1","1-3","2026-06-26T12:45"],
  ["Roll-up United",63,"Uruguay","Spanje","0-1","0-2","2026-06-26T12:45"],
@@ -430,11 +432,9 @@ const CHANGES=[
  ["Roll-up United",62,"Senegal","Irak","1-0","2-0","2026-06-19T13:15"],
  ["Mahir Bikhan",25,"Tsjechië","Zuid-Afrika","1-1","2-1","2026-06-18T04:46"],
  ["Mahir Bikhan",53,"Zuid-Afrika","Zuid-Korea","1-1","0-2","2026-06-18T04:46"],
- ["Bart C",62,"Senegal","Irak","1-0","2-0","2026-06-17T22:16"],
- ["Bart C",40,"Nieuw-Zeeland","Egypte","0-1","0-2","2026-06-17T22:13"],
- ["Bart C",27,"Canada","Qatar","1-0","2-0","2026-06-17T22:11"]
+ ["Bart C",62,"Senegal","Irak","1-0","2-0","2026-06-17T22:16"]
 ];
-const SNAP={"Mark VA":{"3332982":"0-3","3332985":"1-5","3332989":"2-3","3333013":"3-1","3333029":"3-0","3333030":"0-2"},"MichaelVH":{"3332982":"1-5","3332985":"0-5","3332989":"0-0","3333013":"1-0","3333029":"0-0","3333030":"0-0"},"DB":{"3332982":"0-3","3332985":"0-3","3332989":"0-1","3333013":"1-0","3333029":"1-0","3333030":"1-2"},"Roll-up United":{"3332982":"0-2","3332985":"0-3","3332989":"0-1","3333013":"1-0","3333029":"1-0","3333030":"1-1"},"David J":{"3332982":"1-2","3332985":"0-3","3332989":"1-2","3333013":"1-0","3333029":"0-1","3333030":"2-2"},"Ngoy naar de titel!":{"3332982":"0-3","3332985":"0-3","3332989":"1-2","3333013":"1-1","3333029":"1-1","3333030":"2-2"},"Mahir Bikhan":{"3332982":"0-2","3332985":"0-2","3332989":"0-2","3333013":"2-0","3333029":"2-0","3333030":"1-3"},"Bart C":{"3332982":"0-3","3332985":"0-2","3332989":"2-3","3333013":"2-1","3333029":"2-0","3333030":"1-1"}};
+const SNAP={"Mark VA":{"3332982":"0-3","3332985":"1-5","3332989":"2-3","3333013":"3-1","3333029":"3-0","3333030":"0-2"},"MichaelVH":{"3332982":"1-5","3332985":"0-5","3332989":"0-0","3333013":"1-0","3333029":"0-0","3333030":"0-0"},"DB":{"3332982":"0-3","3332985":"0-3","3332989":"0-1","3333013":"1-0","3333029":"1-0","3333030":"1-2"},"Roll-up United":{"3332982":"0-2","3332985":"0-1","3332989":"1-1","3333013":"1-0","3333029":"1-0","3333030":"1-1"},"David J":{"3332982":"1-2","3332985":"0-3","3332989":"1-2","3333013":"1-0","3333029":"0-1","3333030":"2-2"},"Ngoy naar de titel!":{"3332982":"0-3","3332985":"0-3","3332989":"1-2","3333013":"1-1","3333029":"1-1","3333030":"2-2"},"Mahir Bikhan":{"3332982":"0-2","3332985":"0-2","3332989":"0-2","3333013":"2-0","3333029":"2-0","3333030":"1-3"},"Bart C":{"3332982":"0-3","3332985":"0-2","3332989":"2-3","3333013":"2-1","3333029":"2-0","3333030":"1-1"}};
 function renderChanges(){
   const host=document.getElementById('changefeed'); if(!host) return;
   if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}

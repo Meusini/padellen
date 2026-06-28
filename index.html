@@ -191,7 +191,7 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 28/06 08:30
+    Flags via flagcdn.com · updated 28/06 18:58
   </footer>
 </div>
 
@@ -396,46 +396,26 @@ renderTrend();
 
 // changes — recent prediction activity. CHANGES = [player, gameNo, home, away, before, after, isoTime]; before=null = first log/added, set = edited.
 const CHANGES=[
- ["Roll-up United",71,"Jordanië","Argentinië","0-3","0-1","2026-06-27T13:33"],
- ["Roll-up United",72,"Algerije","Oostenrijk","0-1","1-1","2026-06-27T13:33"],
- ["Roll-up United",65,"Egypte","Iran","1-1","1-0","2026-06-26T12:45"],
- ["Roll-up United",66,"Nieuw-Zeeland","België","0-1","1-3","2026-06-26T12:45"],
- ["Roll-up United",63,"Uruguay","Spanje","0-1","0-2","2026-06-26T12:45"],
- ["Roll-up United",62,"Senegal","Irak","2-0","2-1","2026-06-26T12:45"],
- ["Roll-up United",56,"Ecuador","Duitsland","1-1","1-2","2026-06-25T07:52"],
- ["Roll-up United",58,"Japan","Zweden","1-1","1-0","2026-06-25T07:52"],
- ["Roll-up United",56,"Ecuador","Duitsland","0-2","1-1","2026-06-24T05:38"],
- ["Mahir Bikhan",49,"Bosnië en Herzegovina","Qatar","3-1","2-1","2026-06-24T04:47"],
- ["Roll-up United",47,"Panama","Kroatië","0-2","0-1","2026-06-23T06:07"],
- ["Roll-up United",45,"Portugal","Oezbekistan","3-0","2-0","2026-06-23T06:07"],
- ["Roll-up United",46,"Engeland","Ghana","2-1","2-0","2026-06-23T06:07"],
- ["Roll-up United",48,"Colombia","DR Congo","2-0","1-0","2026-06-23T06:07"],
- ["Roll-up United",41,"Argentinië","Oostenrijk","1-0","2-1","2026-06-19T13:15"],
- ["Roll-up United",49,"Bosnië en Herzegovina","Qatar","1-1","1-0","2026-06-19T13:15"],
- ["Roll-up United",44,"Jordanië","Algerije","1-1","0-1","2026-06-19T13:15"],
- ["Roll-up United",35,"Ecuador","Curaçao","2-0","3-0","2026-06-19T13:15"],
- ["Roll-up United",66,"Nieuw-Zeeland","België","0-2","0-1","2026-06-19T13:15"],
- ["Roll-up United",33,"Nederland","Zweden","1-1","2-1","2026-06-19T13:15"],
- ["Roll-up United",54,"Tsjechië","Mexico","1-1","0-1","2026-06-19T13:15"],
- ["Roll-up United",47,"Panama","Kroatië","0-1","0-2","2026-06-19T13:15"],
- ["Roll-up United",63,"Uruguay","Spanje","1-1","0-1","2026-06-19T13:15"],
- ["Roll-up United",71,"Jordanië","Argentinië","0-2","0-3","2026-06-19T13:15"],
- ["Roll-up United",32,"Turkije","Paraguay","1-1","1-0","2026-06-19T13:15"],
- ["Roll-up United",72,"Algerije","Oostenrijk","1-1","0-1","2026-06-19T13:15"],
- ["Roll-up United",42,"Frankrijk","Irak","2-0","4-0","2026-06-19T13:15"],
- ["Roll-up United",52,"Schotland","Brazilië","0-1","0-2","2026-06-19T13:15"],
- ["Roll-up United",45,"Portugal","Oezbekistan","2-0","3-0","2026-06-19T13:15"],
- ["Roll-up United",69,"DR Congo","Oezbekistan","1-1","1-0","2026-06-19T13:15"],
- ["Roll-up United",46,"Engeland","Ghana","1-0","2-1","2026-06-19T13:15"],
- ["Roll-up United",29,"Verenigde Staten","Australië","1-0","2-1","2026-06-19T13:15"],
- ["Roll-up United",43,"Noorwegen","Senegal","1-1","1-0","2026-06-19T13:15"],
- ["Roll-up United",48,"Colombia","DR Congo","1-0","2-0","2026-06-19T13:15"],
- ["Roll-up United",37,"Spanje","Saudi-Arabië","2-0","3-0","2026-06-19T13:15"],
- ["Roll-up United",38,"België","Iran","1-0","2-0","2026-06-19T13:15"],
- ["Roll-up United",62,"Senegal","Irak","1-0","2-0","2026-06-19T13:15"],
- ["Mahir Bikhan",25,"Tsjechië","Zuid-Afrika","1-1","2-1","2026-06-18T04:46"],
- ["Mahir Bikhan",53,"Zuid-Afrika","Zuid-Korea","1-1","0-2","2026-06-18T04:46"],
- ["Bart C",62,"Senegal","Irak","1-0","2-0","2026-06-17T22:16"]
+ ["Roll-up United",71,"Jordanië","Argentinië",null,"0-1","2026-06-27T13:33"],
+ ["Roll-up United",72,"Algerije","Oostenrijk",null,"1-1","2026-06-27T13:33"],
+ ["MichaelVH",71,"Jordanië","Argentinië",null,"0-5","2026-06-26T15:56"],
+ ["MichaelVH",72,"Algerije","Oostenrijk",null,"0-0","2026-06-26T15:56"],
+ ["MichaelVH",65,"Egypte","Iran",null,"0-0","2026-06-26T15:55"],
+ ["MichaelVH",66,"Nieuw-Zeeland","België",null,"0-2","2026-06-26T15:55"],
+ ["MichaelVH",67,"Panama","Engeland",null,"1-5","2026-06-26T15:55"],
+ ["MichaelVH",64,"Kaapverdië","Saudi-Arabië",null,"1-1","2026-06-26T15:55"],
+ ["MichaelVH",70,"DR Congo","Oezbekistan",null,"1-0","2026-06-26T15:55"],
+ ["MichaelVH",68,"Kroatië","Ghana",null,"0-0","2026-06-26T15:55"],
+ ["MichaelVH",69,"Colombia","Portugal",null,"0-0","2026-06-26T15:55"],
+ ["MichaelVH",61,"Noorwegen","Frankrijk",null,"0-1","2026-06-26T15:54"],
+ ["MichaelVH",63,"Uruguay","Spanje",null,"0-4","2026-06-26T15:54"],
+ ["MichaelVH",62,"Senegal","Irak",null,"3-1","2026-06-26T15:54"],
+ ["Roll-up United",65,"Egypte","Iran",null,"1-0","2026-06-26T12:45"],
+ ["Roll-up United",66,"Nieuw-Zeeland","België",null,"1-3","2026-06-26T12:45"],
+ ["Roll-up United",63,"Uruguay","Spanje",null,"0-2","2026-06-26T12:45"],
+ ["Roll-up United",62,"Senegal","Irak",null,"2-1","2026-06-26T12:45"],
+ ["Mahir Bikhan",71,"Jordanië","Argentinië",null,"0-2","2026-06-26T04:51"],
+ ["Mahir Bikhan",72,"Algerije","Oostenrijk",null,"0-2","2026-06-26T04:51"]
 ];
 const SNAP={};
 function renderChanges(){

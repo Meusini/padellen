@@ -9,7 +9,7 @@
   :root{
     --bg:#0b0d12; --card:#14171f; --card2:#171b24; --line:#232733; --line2:#2c3142;
     --txt:#e8ebf2; --dim:#8b93a7; --faint:#5b6377;
-    --green:#34d399; --blue:#60a5fa; --amber:#fbbf24; --red:#f87171; --grey:#3c4458;
+    --green:#34d399; --blue:#60a5fa; --amber:#fbbf24; --red:#f87171; --grey:#3c4458; --purple:#a78bfa;
     --shadow:0 10px 30px -14px rgba(0,0,0,.65);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -41,13 +41,13 @@
   .sop p{margin:0;font-size:13.5px;line-height:1.55;color:#d4dae6}.sop b{color:#fff}
   /* standings */
   .tbl{padding:4px 4px}
-  .tr{display:grid;grid-template-columns:15px minmax(0,1fr) 24px 22px 20px 20px 31px 24px;align-items:center;gap:4px;padding:10px 4px}
+  .tr{display:grid;grid-template-columns:14px minmax(0,1fr) 22px 20px 18px 18px 25px 30px 22px;align-items:center;gap:3px;padding:10px 3px}
   .tr+.tr{border-top:1px solid var(--line)}
   .th{font-size:13px;font-weight:800;padding:8px 4px 9px}
   .tr.th .c{font-size:11px}
   .c{text-align:center;font-variant-numeric:tabular-nums;font-size:14px;font-weight:700}
   .c.z{color:var(--faint);font-weight:500}
-  .g{color:var(--green)} .b{color:var(--blue)} .a{color:var(--amber)} .x{color:var(--red)}
+  .g{color:var(--green)} .b{color:var(--blue)} .a{color:var(--amber)} .x{color:var(--red)} .k{color:var(--purple)}
   .rk{text-align:center;color:var(--faint);font-weight:800;font-variant-numeric:tabular-nums;font-size:13px}
   .nm{min-width:0;font-weight:650;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .pt{text-align:center;font-weight:800;font-variant-numeric:tabular-nums;font-size:15px}
@@ -147,7 +147,7 @@
       <div class="tr th">
         <div class="rk">#</div><div>Player</div>
         <div class="c g">✓✓✓</div><div class="c b">✓✓</div><div class="c a">✓</div><div class="c x">✗</div>
-        <div class="c" style="color:var(--dim)">Pts</div><div class="c" style="color:var(--dim)">+/−</div>
+        <div class="c k">KO</div><div class="c" style="color:var(--dim)">Pts</div><div class="c" style="color:var(--dim)">+/−</div>
       </div>
       <div id="rows"></div>
     </div>
@@ -155,7 +155,7 @@
       <span class="lgi"><b class="g">✓✓✓</b> exact score · 10 pts</span>
       <span class="lgi"><b class="b">✓✓</b> goal difference · 7 pts</span>
       <span class="lgi"><b class="a">✓</b> winner · 5 pts</span>
-      <span class="lgi"><b class="x">✗</b> miss · 1 pt</span>
+      <span class="lgi"><b class="x">✗</b> miss · 1 pt</span> <span class="lgi"><b class="k">KO</b> knockout pts: +10 advance, +6 exact, +4 GD</span>
       <span class="lgi"><b>+/−</b> places vs last match</span>
     </div>
   </div>
@@ -191,31 +191,35 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 28/06 18:58
+    Flags via flagcdn.com · updated 29/06 09:49
   </footer>
 </div>
 
 <script>
 // [name, exact, gd, winner, miss, points]
 const STAND=[
- ["Roll-up United",9,9,26,28,311],
- ["Mahir Bikhan",11,6,25,30,307],
- ["Ngoy naar de titel!",10,7,25,29,303],
- ["DB",10,8,23,31,302],
- ["Bart C",7,10,25,30,295],
- ["MichaelVH",3,11,27,27,269],
- ["Mark VA",7,5,22,38,253],
- ["David J",3,7,28,34,253],
- ["the one and only",0,0,0,3,3]
+ ["Roll-up United",9,9,26,28,331,20],
+ ["DB",10,8,23,31,322,20],
+ ["Mahir Bikhan",11,6,25,30,317,10],
+ ["Bart C",7,10,25,30,309,14],
+ ["Ngoy naar de titel!",10,7,25,29,303,0],
+ ["MichaelVH",3,11,27,27,269,0],
+ ["David J",3,7,28,34,267,14],
+ ["Mark VA",7,5,22,38,253,0],
+ ["the one and only",0,0,0,3,3,0]
 ];
-const PREV={"Ngoy naar de titel!":1,"DB":2,"Mahir Bikhan":3,"Roll-up United":4,"Bart C":5,"MichaelVH":6,"David J":7,"Mark VA":8,"the one and only":9};
-const PREVAT=72;
+const PREV={"Roll-up United":1,"Mahir Bikhan":2,"Ngoy naar de titel!":3,"DB":4,"Bart C":5,"MichaelVH":6,"David J":7,"Mark VA":8,"the one and only":9};
+const PREVAT=73;
 // home, homeISO, away, awayISO, when, pH, pD, pA, picks
 const NEXT=[
- 
+ ["Brazilië","br","Japan","jp","29/06 19:00",null,null,null,"MichaelVH 1-0 · DB 2-1 · Roll-up United 2-0 · David J 2-1 · Mahir Bikhan 1-0 · Bart C 2-0"],
+ ["Duitsland","de","Paraguay","py","29/06 22:30",null,null,null,"MichaelVH 2-0 · DB 2-0 · Roll-up United 2-0 · David J 3-0 · Mahir Bikhan 2-1 · Bart C 3-1"],
+ ["Nederland","nl","Marokko","ma","30/06 03:00",null,null,null,"MichaelVH 1-0 · DB 3-2 · Roll-up United 1-0 · David J 2-1 · Bart C 2-2"],
+ ["Ivoorkust","ci","Noorwegen","no","30/06 19:00",null,null,null,"MichaelVH 0-1 · DB 1-2 · Roll-up United 1-2 · Bart C 1-3"]
 ];
 // home, homeISO, away, awayISO, when, homeScore, awayScore, "Name h-a|pts · ..."
 const LAST=[
+ ["Zuid-Afrika","za","Canada","ca","28/06",0,1,"DB 0-1|20 · Roll-up United 0-1|20 · David J 1-2|14 · Bart C 1-2|14 · Mahir Bikhan 0-2|10"],
  ["Algerije","dz","Oostenrijk","at","28/06",3,3,"MichaelVH 0-0|7 · Roll-up United 1-1|7 · Mark VA 2-3|1 · DB 0-1|1 · David J 1-2|1 · Ngoy naar de titel! 1-2|1 · Mahir Bikhan 0-2|1 · Bart C 2-3|1"],
  ["Jordanië","jo","Argentinië","ar","28/06",1,3,"Mahir Bikhan 0-2|7 · Bart C 0-2|7 · Mark VA 1-5|5 · MichaelVH 0-5|5 · DB 0-3|5 · Roll-up United 0-1|5 · David J 0-3|5 · Ngoy naar de titel! 0-3|5"],
  ["DR Congo","cd","Oezbekistan","uz","28/06",3,1,"Mark VA 3-1|10 · Mahir Bikhan 2-0|7 · MichaelVH 1-0|5 · DB 1-0|5 · Roll-up United 1-0|5 · David J 1-0|5 · Bart C 2-1|5 · Ngoy naar de titel! 1-1|1"],
@@ -298,23 +302,23 @@ function out(s){const [h,a]=s.split('-').map(Number);return h>a?'H':h<a?'A':'D';
 function scClass(s,fav){const o=out(s);return o==='D'?'sy':(fav==null?'':(o===fav?'sg':'sr'));}
 
 // subtitle
-function sub(){document.getElementById('sub').textContent=`Matchday 1 · 72 of 72 group games played · ${STAND.length} players`;}
+function sub(){document.getElementById('sub').textContent=`Knockout phase · 72/72 group · 1/32 KO · ${STAND.length} players`;}
 sub();
 
 document.getElementById('missed').innerHTML=
- `Latest in: <b>Algerije 3-3 Oostenrijk</b> — not a soul saw that coming. <b>Roll-up United</b> tops it on <b>311</b>, 4 clear, 9 exact and ice-cold. <b>Ngoy naar de titel!</b> is in freefall, down <b>2</b>. And <b>the one and only</b>? Vanished — rock bottom on 3, 308 adrift.`;
+ `Latest in: <b>Zuid-Afrika 0-1 Canada</b> — only <b>Mahir Bikhan</b> nailed it. <b>Roll-up United</b> tops it on <b>331</b>, 9 clear, 9 exact and ice-cold. <b>DB</b> is on fire, charging up <b>2</b>. The floor opened under <b>Ngoy naar de titel!</b> — <b>2</b> places gone. Spare a thought for <b>the one and only</b>, lost at sea on 3.`;
 document.getElementById('upcoming').innerHTML=
- `Group stage all but done. <b>Roll-up United</b> is the one to hunt down.`;
+ `On deck: <b>Brazilië – Japan</b>. 2 of 6 have piled onto <b>1-0</b>. <b>Roll-up United</b> is swinging for the fences at 2-0. Then <b>Duitsland–Paraguay</b> and <b>Nederland–Marokko</b>. <b>Roll-up United</b> is the one to hunt down.`;
 
 // standings
 const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));
 document.getElementById('rows').innerHTML=ranked.map((p,i)=>{
-  const [nm,e,g,w,x,pt]=p;
+  const [nm,e,g,w,x,pt,ko]=p;
   let dl='<span class="dl">–</span>';
   if(PREV[nm]!=null){const d=PREV[nm]-(i+1);dl=d>0?`<span class="dl up">▲${d}</span>`:d<0?`<span class="dl dn">▼${-d}</span>`:'<span class="dl">–</span>';}
   const cell=(v,c)=>`<div class="c ${v?c:'z'}">${v}</div>`;
   return `<div class="tr"><div class="rk">${i+1}</div><div class="nm">${nm}</div>
-    ${cell(e,'g')}${cell(g,'b')}${cell(w,'a')}${cell(x,'x')}
+    ${cell(e,'g')}${cell(g,'b')}${cell(w,'a')}${cell(x,'x')}${cell(ko,'k')}
     <div class="pt">${pt}</div>${dl}</div>`;
 }).join('');
 
@@ -396,28 +400,28 @@ renderTrend();
 
 // changes — recent prediction activity. CHANGES = [player, gameNo, home, away, before, after, isoTime]; before=null = first log/added, set = edited.
 const CHANGES=[
- ["Roll-up United",71,"Jordanië","Argentinië",null,"0-1","2026-06-27T13:33"],
- ["Roll-up United",72,"Algerije","Oostenrijk",null,"1-1","2026-06-27T13:33"],
- ["MichaelVH",71,"Jordanië","Argentinië",null,"0-5","2026-06-26T15:56"],
- ["MichaelVH",72,"Algerije","Oostenrijk",null,"0-0","2026-06-26T15:56"],
- ["MichaelVH",65,"Egypte","Iran",null,"0-0","2026-06-26T15:55"],
- ["MichaelVH",66,"Nieuw-Zeeland","België",null,"0-2","2026-06-26T15:55"],
- ["MichaelVH",67,"Panama","Engeland",null,"1-5","2026-06-26T15:55"],
- ["MichaelVH",64,"Kaapverdië","Saudi-Arabië",null,"1-1","2026-06-26T15:55"],
- ["MichaelVH",70,"DR Congo","Oezbekistan",null,"1-0","2026-06-26T15:55"],
- ["MichaelVH",68,"Kroatië","Ghana",null,"0-0","2026-06-26T15:55"],
- ["MichaelVH",69,"Colombia","Portugal",null,"0-0","2026-06-26T15:55"],
- ["MichaelVH",61,"Noorwegen","Frankrijk",null,"0-1","2026-06-26T15:54"],
- ["MichaelVH",63,"Uruguay","Spanje",null,"0-4","2026-06-26T15:54"],
- ["MichaelVH",62,"Senegal","Irak",null,"3-1","2026-06-26T15:54"],
- ["Roll-up United",65,"Egypte","Iran",null,"1-0","2026-06-26T12:45"],
- ["Roll-up United",66,"Nieuw-Zeeland","België",null,"1-3","2026-06-26T12:45"],
- ["Roll-up United",63,"Uruguay","Spanje",null,"0-2","2026-06-26T12:45"],
- ["Roll-up United",62,"Senegal","Irak",null,"2-1","2026-06-26T12:45"],
- ["Mahir Bikhan",71,"Jordanië","Argentinië",null,"0-2","2026-06-26T04:51"],
- ["Mahir Bikhan",72,"Algerije","Oostenrijk",null,"0-2","2026-06-26T04:51"]
+ ["MichaelVH",84,"Portugal","Kroatië",null,"1-0","2026-06-28T23:40"],
+ ["MichaelVH",86,"Australië","Egypte",null,"0-1","2026-06-28T23:40"],
+ ["MichaelVH",87,"Argentinië","Kaapverdië",null,"5-0","2026-06-28T23:40"],
+ ["MichaelVH",85,"Zwitserland","Algerije",null,"1-0","2026-06-28T23:40"],
+ ["MichaelVH",83,"Spanje","Oostenrijk",null,"2-0","2026-06-28T23:40"],
+ ["MichaelVH",88,"Colombia","Ghana",null,"1-0","2026-06-28T23:40"],
+ ["MichaelVH",82,"Verenigde Staten","Bosnië en Herzegovina",null,"1-0","2026-06-28T23:39"],
+ ["MichaelVH",77,"Ivoorkust","Noorwegen",null,"0-1","2026-06-28T23:39"],
+ ["MichaelVH",78,"Frankrijk","Zweden",null,"3-0","2026-06-28T23:39"],
+ ["MichaelVH",79,"Mexico","Ecuador",null,"1-0","2026-06-28T23:39"],
+ ["MichaelVH",80,"Engeland","DR Congo",null,"2-0","2026-06-28T23:39"],
+ ["MichaelVH",76,"Nederland","Marokko",null,"1-0","2026-06-28T23:39"],
+ ["MichaelVH",81,"België","Senegal",null,"2-0","2026-06-28T23:39"],
+ ["MichaelVH",75,"Duitsland","Paraguay",null,"2-0","2026-06-28T23:38"],
+ ["MichaelVH",74,"Brazilië","Japan",null,"1-0","2026-06-28T23:38"],
+ ["Mahir Bikhan",75,"Duitsland","Paraguay",null,"2-1","2026-06-28T17:37"],
+ ["Mahir Bikhan",74,"Brazilië","Japan",null,"1-0","2026-06-28T17:36"],
+ ["David J",75,"Duitsland","Paraguay",null,"3-0","2026-06-28T17:23"],
+ ["David J",76,"Nederland","Marokko",null,"2-1","2026-06-28T17:23"],
+ ["David J",73,"Zuid-Afrika","Canada",null,"1-2","2026-06-28T17:22"]
 ];
-const SNAP={};
+const SNAP={"MichaelVH":{"3332963":"2-0","3332966":"1-0","3332969":"1-0","3332977":"0-1","3332994":"0-1","3333001":"5-0","3333007":"3-0","3333008":"1-0","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333023":"1-0","3333026":"1-0","3333027":"1-0","3333040":"2-0"},"DB":{"3332963":"2-0","3332966":"1-1","3332969":"2-1","3332977":"1-2","3332994":"0-1","3333001":"3-0","3333007":"3-1","3333008":"2-0","3333010":"2-1","3333014":"2-0","3333019":"2-0","3333023":"2-1","3333026":"3-2","3333027":"1-0","3333040":"2-1"},"Roll-up United":{"3332963":"2-0","3332966":"1-0","3332969":"2-0","3332977":"1-2","3332994":"1-2","3333001":"2-0","3333007":"2-0","3333008":"2-0","3333010":"2-1","3333014":"3-1","3333019":"2-1","3333023":"2-0","3333026":"1-0","3333027":"2-1","3333040":"2-1"},"David J":{"3332963":"3-0","3333023":"2-1","3333026":"2-1"},"Mahir Bikhan":{"3332963":"2-1","3333023":"1-0"},"Bart C":{"3332963":"3-1","3332966":"2-2","3332969":"2-1","3332977":"1-3","3332994":"0-2","3333001":"3-0","3333007":"3-0","3333008":"2-1","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333023":"2-0","3333026":"2-2","3333027":"3-1","3333040":"3-2"}};
 function renderChanges(){
   const host=document.getElementById('changefeed'); if(!host) return;
   if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}

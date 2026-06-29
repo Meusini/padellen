@@ -191,7 +191,7 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 29/06 09:49
+    Flags via flagcdn.com · updated 29/06 10:03
   </footer>
 </div>
 
@@ -212,7 +212,7 @@ const PREV={"Roll-up United":1,"Mahir Bikhan":2,"Ngoy naar de titel!":3,"DB":4,"
 const PREVAT=73;
 // home, homeISO, away, awayISO, when, pH, pD, pA, picks
 const NEXT=[
- ["Brazilië","br","Japan","jp","29/06 19:00",null,null,null,"MichaelVH 1-0 · DB 2-1 · Roll-up United 2-0 · David J 2-1 · Mahir Bikhan 1-0 · Bart C 2-0"],
+ ["Brazilië","br","Japan","jp","29/06 19:00",null,null,null,"MichaelVH 1-0 · DB 2-1 · Roll-up United 1-0 · David J 2-1 · Mahir Bikhan 1-0 · Bart C 2-0"],
  ["Duitsland","de","Paraguay","py","29/06 22:30",null,null,null,"MichaelVH 2-0 · DB 2-0 · Roll-up United 2-0 · David J 3-0 · Mahir Bikhan 2-1 · Bart C 3-1"],
  ["Nederland","nl","Marokko","ma","30/06 03:00",null,null,null,"MichaelVH 1-0 · DB 3-2 · Roll-up United 1-0 · David J 2-1 · Bart C 2-2"],
  ["Ivoorkust","ci","Noorwegen","no","30/06 19:00",null,null,null,"MichaelVH 0-1 · DB 1-2 · Roll-up United 1-2 · Bart C 1-3"]
@@ -306,9 +306,9 @@ function sub(){document.getElementById('sub').textContent=`Knockout phase · 72/
 sub();
 
 document.getElementById('missed').innerHTML=
- `Latest in: <b>Zuid-Afrika 0-1 Canada</b> — only <b>Mahir Bikhan</b> nailed it. <b>Roll-up United</b> tops it on <b>331</b>, 9 clear, 9 exact and ice-cold. <b>DB</b> is on fire, charging up <b>2</b>. The floor opened under <b>Ngoy naar de titel!</b> — <b>2</b> places gone. Spare a thought for <b>the one and only</b>, lost at sea on 3.`;
+ `Latest in: <b>Zuid-Afrika 0-1 Canada</b> — only <b>Mahir Bikhan</b> nailed it. <b>Roll-up United</b> tops it on <b>331</b>, 9 clear, 9 exact and ice-cold. <b>DB</b> is on fire, charging up <b>2</b>. The floor opened under <b>Ngoy naar de titel!</b> — <b>2</b> places gone. Spare a thought for <b>the one and only</b>, lost at sea on 3. <b>Roll-up United</b> got cold feet — swapped the #82 pick 2-0 → 1-0 (Changes).`;
 document.getElementById('upcoming').innerHTML=
- `On deck: <b>Brazilië – Japan</b>. 2 of 6 have piled onto <b>1-0</b>. <b>Roll-up United</b> is swinging for the fences at 2-0. Then <b>Duitsland–Paraguay</b> and <b>Nederland–Marokko</b>. <b>Roll-up United</b> is the one to hunt down.`;
+ `On deck: <b>Brazilië – Japan</b>. 3 of 6 have piled onto <b>1-0</b>. <b>Bart C</b> is swinging for the fences at 2-0. Then <b>Duitsland–Paraguay</b> and <b>Nederland–Marokko</b>. <b>Roll-up United</b> is the one to hunt down.`;
 
 // standings
 const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));
@@ -400,6 +400,11 @@ renderTrend();
 
 // changes — recent prediction activity. CHANGES = [player, gameNo, home, away, before, after, isoTime]; before=null = first log/added, set = edited.
 const CHANGES=[
+ ["Roll-up United",82,"Verenigde Staten","Bosnië en Herzegovina","2-0","1-0","2026-06-29T08:01"],
+ ["Roll-up United",85,"Zwitserland","Algerije","2-0","1-0","2026-06-29T08:01"],
+ ["Roll-up United",80,"Engeland","DR Congo","3-1","2-0","2026-06-29T08:01"],
+ ["Roll-up United",74,"Brazilië","Japan","2-0","1-0","2026-06-29T08:01"],
+ ["Roll-up United",88,"Colombia","Ghana","2-1","1-0","2026-06-29T08:01"],
  ["MichaelVH",84,"Portugal","Kroatië",null,"1-0","2026-06-28T23:40"],
  ["MichaelVH",86,"Australië","Egypte",null,"0-1","2026-06-28T23:40"],
  ["MichaelVH",87,"Argentinië","Kaapverdië",null,"5-0","2026-06-28T23:40"],
@@ -421,7 +426,7 @@ const CHANGES=[
  ["David J",76,"Nederland","Marokko",null,"2-1","2026-06-28T17:23"],
  ["David J",73,"Zuid-Afrika","Canada",null,"1-2","2026-06-28T17:22"]
 ];
-const SNAP={"MichaelVH":{"3332963":"2-0","3332966":"1-0","3332969":"1-0","3332977":"0-1","3332994":"0-1","3333001":"5-0","3333007":"3-0","3333008":"1-0","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333023":"1-0","3333026":"1-0","3333027":"1-0","3333040":"2-0"},"DB":{"3332963":"2-0","3332966":"1-1","3332969":"2-1","3332977":"1-2","3332994":"0-1","3333001":"3-0","3333007":"3-1","3333008":"2-0","3333010":"2-1","3333014":"2-0","3333019":"2-0","3333023":"2-1","3333026":"3-2","3333027":"1-0","3333040":"2-1"},"Roll-up United":{"3332963":"2-0","3332966":"1-0","3332969":"2-0","3332977":"1-2","3332994":"1-2","3333001":"2-0","3333007":"2-0","3333008":"2-0","3333010":"2-1","3333014":"3-1","3333019":"2-1","3333023":"2-0","3333026":"1-0","3333027":"2-1","3333040":"2-1"},"David J":{"3332963":"3-0","3333023":"2-1","3333026":"2-1"},"Mahir Bikhan":{"3332963":"2-1","3333023":"1-0"},"Bart C":{"3332963":"3-1","3332966":"2-2","3332969":"2-1","3332977":"1-3","3332994":"0-2","3333001":"3-0","3333007":"3-0","3333008":"2-1","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333023":"2-0","3333026":"2-2","3333027":"3-1","3333040":"3-2"}};
+const SNAP={"MichaelVH":{"3332963":"2-0","3332966":"1-0","3332969":"1-0","3332977":"0-1","3332994":"0-1","3333001":"5-0","3333007":"3-0","3333008":"1-0","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333023":"1-0","3333026":"1-0","3333027":"1-0","3333040":"2-0"},"DB":{"3332963":"2-0","3332966":"1-1","3332969":"2-1","3332977":"1-2","3332994":"0-1","3333001":"3-0","3333007":"3-1","3333008":"2-0","3333010":"2-1","3333014":"2-0","3333019":"2-0","3333023":"2-1","3333026":"3-2","3333027":"1-0","3333040":"2-1"},"Roll-up United":{"3332963":"2-0","3332966":"1-0","3332969":"1-0","3332977":"1-2","3332994":"1-2","3333001":"2-0","3333007":"2-0","3333008":"1-0","3333010":"2-1","3333014":"2-0","3333019":"2-1","3333023":"1-0","3333026":"1-0","3333027":"1-0","3333040":"2-1"},"David J":{"3332963":"3-0","3333023":"2-1","3333026":"2-1"},"Mahir Bikhan":{"3332963":"2-1","3333023":"1-0"},"Bart C":{"3332963":"3-1","3332966":"2-2","3332969":"2-1","3332977":"1-3","3332994":"0-2","3333001":"3-0","3333007":"3-0","3333008":"2-1","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333023":"2-0","3333026":"2-2","3333027":"3-1","3333040":"3-2"}};
 function renderChanges(){
   const host=document.getElementById('changefeed'); if(!host) return;
   if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}

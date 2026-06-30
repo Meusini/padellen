@@ -191,7 +191,7 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 30/06 22:16
+    Flags via flagcdn.com · updated 30/06 22:22
   </footer>
 </div>
 
@@ -213,7 +213,7 @@ const PREVAT=77;
 // home, homeISO, away, awayISO, when, pH, pD, pA, picks
 const NEXT=[
  ["Frankrijk","fr","Zweden","se","30/06 23:00",null,null,null,"Mark VA 2-0 · MichaelVH 3-0 · DB 3-1 · Roll-up United 2-0 · David J 2-0 · Mahir Bikhan 2-0 · Bart C 3-0"],
- ["Mexico","mx","Ecuador","ec","01/07 03:00",null,null,null,"Mark VA 1-0 · MichaelVH 1-0 · DB 2-1 · Roll-up United 2-1 · David J 2-1 · Mahir Bikhan 1-1 · Bart C 1-0"],
+ ["Mexico","mx","Ecuador","ec","01/07 03:00",null,null,null,"Mark VA 1-0 · MichaelVH 1-0 · DB 2-1 · Roll-up United 1-0 · David J 2-1 · Mahir Bikhan 1-1 · Bart C 1-0"],
  ["Engeland","gb-eng","DR Congo","cd","01/07 18:00",null,null,null,"Mark VA 1-1 · MichaelVH 2-0 · DB 2-0 · Roll-up United 2-0 · David J 3-1 · Mahir Bikhan 2-0 · Bart C 2-0"],
  ["België","be","Senegal","sn","01/07 22:00",null,null,null,"Mark VA 1-0 · MichaelVH 2-0 · DB 2-1 · Roll-up United 2-1 · David J 2-1 · Mahir Bikhan 1-0 · Bart C 3-2"]
 ];
@@ -310,7 +310,7 @@ function sub(){document.getElementById('sub').textContent=`Knockout phase · 72/
 sub();
 
 document.getElementById('missed').innerHTML=
- `Latest in: <b>Ivoorkust 1-2 Noorwegen</b> — 3 called it dead-on (<b>Mark VA, Mahir Bikhan, Bart C</b>). <b>Roll-up United</b> leads on <b>367</b>, but <b>DB</b> is right on the bumper, 9 exact and ice-cold. <b>David J</b> went off — <b>+2</b> spots. Anchored to the foot: <b>the one and only</b>, 3 and 364 off the pace.`;
+ `Latest in: <b>Ivoorkust 1-2 Noorwegen</b> — 3 called it dead-on (<b>Mark VA, Mahir Bikhan, Bart C</b>). <b>Roll-up United</b> leads on <b>367</b>, but <b>DB</b> is right on the bumper, 9 exact and ice-cold. <b>David J</b> went off — <b>+2</b> spots. Anchored to the foot: <b>the one and only</b>, 3 and 364 off the pace. <b>Roll-up United</b> got cold feet — swapped the #79 pick 2-1 → 1-0 (Changes).`;
 document.getElementById('upcoming').innerHTML=
  `Up next: <b>Frankrijk – Zweden</b>. 4 of 7 have piled onto <b>2-0</b>. <b>MichaelVH</b> is swinging for the fences at 3-0. Then <b>Mexico–Ecuador</b> and <b>Engeland–DR Congo</b>. <b>Roll-up United</b> is the one to hunt down.`;
 
@@ -404,6 +404,7 @@ renderTrend();
 
 // changes — recent prediction activity. CHANGES = [player, gameNo, home, away, before, after, isoTime]; before=null = first log/added, set = edited.
 const CHANGES=[
+ ["Roll-up United",79,"Mexico","Ecuador","2-1","1-0","2026-06-30T20:21"],
  ["Roll-up United",82,"Verenigde Staten","Bosnië en Herzegovina","2-0","1-0","2026-06-29T08:01"],
  ["Roll-up United",85,"Zwitserland","Algerije","2-0","1-0","2026-06-29T08:01"],
  ["Roll-up United",80,"Engeland","DR Congo","3-1","2-0","2026-06-29T08:01"],
@@ -430,7 +431,7 @@ const CHANGES=[
  ["David J",76,"Nederland","Marokko",null,"2-1","2026-06-28T17:23"],
  ["David J",73,"Zuid-Afrika","Canada",null,"1-2","2026-06-28T17:22"]
 ];
-const SNAP={"Mark VA":{"3332966":"1-1","3332969":"1-0","3332994":"0-1","3333001":"3-0","3333005":"0-1","3333007":"2-0","3333008":"2-1","3333010":"1-0","3333014":"1-1","3333019":"3-1","3333027":"0-1","3333040":"1-0"},"MichaelVH":{"3332966":"1-0","3332969":"1-0","3332994":"0-1","3333001":"5-0","3333007":"3-0","3333008":"1-0","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333027":"1-0","3333040":"2-0"},"DB":{"3332966":"1-1","3332969":"2-1","3332994":"0-1","3332995":"2-1","3333001":"3-0","3333005":"0-1","3333007":"3-1","3333008":"2-0","3333010":"2-1","3333014":"2-0","3333019":"2-0","3333027":"1-0","3333040":"2-1"},"Roll-up United":{"3332966":"1-0","3332969":"1-0","3332994":"1-2","3333001":"2-0","3333007":"2-0","3333008":"1-0","3333010":"2-1","3333014":"2-0","3333019":"2-1","3333027":"1-0","3333040":"2-1"},"David J":{"3333007":"2-0","3333010":"2-1","3333014":"3-1","3333040":"2-1"},"Mahir Bikhan":{"3332969":"1-0","3333007":"2-0","3333010":"1-1","3333014":"2-0","3333040":"1-0"},"Bart C":{"3332966":"2-2","3332969":"2-1","3332994":"0-2","3333001":"3-0","3333007":"3-0","3333008":"2-1","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333027":"3-1","3333040":"3-2"}};
+const SNAP={"Mark VA":{"3332966":"1-1","3332969":"1-0","3332994":"0-1","3333001":"3-0","3333005":"0-1","3333007":"2-0","3333008":"2-1","3333010":"1-0","3333014":"1-1","3333019":"3-1","3333027":"0-1","3333040":"1-0"},"MichaelVH":{"3332966":"1-0","3332969":"1-0","3332994":"0-1","3333001":"5-0","3333007":"3-0","3333008":"1-0","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333027":"1-0","3333040":"2-0"},"DB":{"3332966":"1-1","3332969":"2-1","3332994":"0-1","3332995":"2-1","3333001":"3-0","3333005":"0-1","3333007":"3-1","3333008":"2-0","3333010":"2-1","3333014":"2-0","3333019":"2-0","3333027":"1-0","3333040":"2-1"},"Roll-up United":{"3332966":"1-0","3332969":"1-0","3332994":"1-2","3333001":"2-0","3333007":"2-0","3333008":"1-0","3333010":"1-0","3333014":"2-0","3333019":"2-1","3333027":"1-0","3333040":"2-1"},"David J":{"3333007":"2-0","3333010":"2-1","3333014":"3-1","3333040":"2-1"},"Mahir Bikhan":{"3332969":"1-0","3333007":"2-0","3333010":"1-1","3333014":"2-0","3333040":"1-0"},"Bart C":{"3332966":"2-2","3332969":"2-1","3332994":"0-2","3333001":"3-0","3333007":"3-0","3333008":"2-1","3333010":"1-0","3333014":"2-0","3333019":"2-0","3333027":"3-1","3333040":"3-2"}};
 function renderChanges(){
   const host=document.getElementById('changefeed'); if(!host) return;
   if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}

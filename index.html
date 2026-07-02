@@ -191,34 +191,37 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 01/07 16:05
+    Flags via flagcdn.com · updated 02/07 16:04
   </footer>
 </div>
 
 <script>
 // [name, exact, gd, winner, miss, points]
 const STAND=[
- ["Roll-up United",9,9,26,28,387,76],
- ["DB",10,8,23,31,384,82],
- ["Bart C",7,10,25,30,374,79],
- ["Mahir Bikhan",11,6,25,30,372,65],
- ["MichaelVH",3,11,27,27,329,60],
- ["David J",3,7,28,34,329,76],
+ ["Roll-up United",9,9,26,28,421,110],
+ ["DB",10,8,23,31,418,116],
+ ["Bart C",7,10,25,30,414,119],
+ ["Mahir Bikhan",11,6,25,30,406,99],
+ ["David J",3,7,28,34,373,120],
+ ["MichaelVH",3,11,27,27,359,90],
+ ["Mark VA",7,5,22,38,328,75],
  ["Ngoy naar de titel!",10,7,25,29,303,0],
- ["Mark VA",7,5,22,38,294,41],
  ["the one and only",0,0,0,3,3,0]
 ];
-const PREV={"Roll-up United":1,"DB":2,"Mahir Bikhan":3,"Bart C":4,"David J":5,"Ngoy naar de titel!":6,"MichaelVH":7,"Mark VA":8,"the one and only":9};
-const PREVAT=79;
+const PREV={"Roll-up United":1,"DB":2,"Bart C":3,"Mahir Bikhan":4,"David J":5,"MichaelVH":6,"Ngoy naar de titel!":7,"Mark VA":8,"the one and only":9};
+const PREVAT=82;
 // home, homeISO, away, awayISO, when, pH, pD, pA, picks
 const NEXT=[
- ["Engeland","gb-eng","DR Congo","cd","01/07 18:00",null,null,null,"Mark VA 1-1 · MichaelVH 2-0 · DB 2-0 · Roll-up United 2-0 · David J 3-1 · Mahir Bikhan 2-0 · Bart C 2-0"],
- ["België","be","Senegal","sn","01/07 22:00",null,null,null,"Mark VA 1-0 · MichaelVH 2-0 · DB 2-1 · Roll-up United 2-1 · David J 2-1 · Mahir Bikhan 1-0 · Bart C 3-2"],
- ["Verenigde Staten","us","Bosnië en Herzegovina","ba","02/07 02:00",null,null,null,"Mark VA 1-0 · MichaelVH 1-0 · DB 2-1 · Roll-up United 1-0 · Mahir Bikhan 1-0 · Bart C 2-1"],
- ["Spanje","es","Oostenrijk","at","02/07 21:00",null,null,null,"Mark VA 3-1 · MichaelVH 2-0 · DB 2-0 · Roll-up United 2-1 · Bart C 2-0"]
+ ["Spanje","es","Oostenrijk","at","02/07 21:00",null,null,null,"Mark VA 3-1 · MichaelVH 2-0 · DB 2-0 · Roll-up United 2-1 · David J 1-1 · Bart C 2-0"],
+ ["Portugal","pt","Kroatië","hr","03/07 01:00",null,null,null,"Mark VA 1-1 · MichaelVH 1-0 · DB 1-1 · Roll-up United 1-0 · David J 2-1 · Bart C 2-2"],
+ ["Zwitserland","ch","Algerije","dz","03/07 05:00",null,null,null,"Mark VA 2-1 · MichaelVH 1-0 · DB 2-0 · Roll-up United 1-0 · Bart C 2-1"],
+ ["Australië","au","Egypte","eg","03/07 20:00",null,null,null,"Mark VA 0-1 · MichaelVH 0-1 · DB 0-1 · Roll-up United 1-2 · Bart C 0-2"]
 ];
 // home, homeISO, away, awayISO, when, homeScore, awayScore, "Name h-a|pts · ..."
 const LAST=[
+ ["Verenigde Staten","us","Bosnië en Herzegovina","ba","02/07",2,0,"David J 2-0|20 · Mark VA 1-0|10 · MichaelVH 1-0|10 · DB 2-1|10 · Roll-up United 1-0|10 · Mahir Bikhan 1-0|10 · Bart C 2-1|10"],
+ ["België","be","Senegal","sn","01/07",3,2,"Bart C 3-2|20 · Mark VA 1-0|14 · DB 2-1|14 · Roll-up United 2-1|14 · David J 2-1|14 · Mahir Bikhan 1-0|14 · MichaelVH 2-0|10"],
+ ["Engeland","gb-eng","DR Congo","cd","01/07",2,1,"Mark VA 1-1|10 · MichaelVH 2-0|10 · DB 2-0|10 · Roll-up United 2-0|10 · David J 3-1|10 · Mahir Bikhan 2-0|10 · Bart C 2-0|10"],
  ["Mexico","mx","Ecuador","ec","01/07",2,0,"Mark VA 1-0|10 · MichaelVH 1-0|10 · DB 2-1|10 · Roll-up United 1-0|10 · David J 2-1|10 · Mahir Bikhan 1-1|10 · Bart C 1-0|10"],
  ["Frankrijk","fr","Zweden","se","30/06",3,0,"MichaelVH 3-0|20 · Bart C 3-0|20 · Mark VA 2-0|10 · DB 3-1|10 · Roll-up United 2-0|10 · David J 2-0|10 · Mahir Bikhan 2-0|10"],
  ["Ivoorkust","ci","Noorwegen","no","30/06",1,2,"DB 1-2|20 · Roll-up United 1-2|20 · David J 1-2|20 · MichaelVH 0-1|14 · Mark VA 0-2|10 · Mahir Bikhan 0-3|10 · Bart C 1-3|10"],
@@ -308,13 +311,13 @@ function out(s){const [h,a]=s.split('-').map(Number);return h>a?'H':h<a?'A':'D';
 function scClass(s,fav){const o=out(s);return o==='D'?'sy':(fav==null?'':(o===fav?'sg':'sr'));}
 
 // subtitle
-function sub(){document.getElementById('sub').textContent=`Knockout phase · 72/72 group · 7/32 KO · ${STAND.length} players`;}
+function sub(){document.getElementById('sub').textContent=`Knockout phase · 72/72 group · 10/32 KO · ${STAND.length} players`;}
 sub();
 
 document.getElementById('missed').innerHTML=
- `Latest in: <b>Mexico 2-0 Ecuador</b> — 7 called it dead-on (<b>Mark VA, MichaelVH, DB</b>). <b>Roll-up United</b> leads on <b>387</b>, but <b>DB</b> is right on the bumper, 9 exact and ice-cold. <b>MichaelVH</b> is on fire, charging up <b>2</b>. Spare a thought for <b>the one and only</b>, lost at sea on 3.`;
+ `Latest in: <b>Verenigde Staten 2-0 Bosnië en Herzegovina</b> — 6 called it dead-on (<b>Mark VA, MichaelVH, DB</b>). <b>Roll-up United</b> leads on <b>421</b>, but <b>DB</b> is right on the bumper, 9 exact and ice-cold. Spare a thought for <b>the one and only</b>, lost at sea on 3.`;
 document.getElementById('upcoming').innerHTML=
- `On deck: <b>Engeland – DR Congo</b>. 5 of 7 have piled onto <b>2-0</b>. <b>MichaelVH</b> is swinging for the fences at 2-0. <b>Mark VA</b> is the brave one calling a draw. Then <b>België–Senegal</b> and <b>Verenigde Staten–Bosnië en Herzegovina</b>. <b>Roll-up United</b> is the one to hunt down.`;
+ `On deck: <b>Spanje – Oostenrijk</b>. 3 of 6 have piled onto <b>2-0</b>. <b>Mark VA</b> is swinging for the fences at 3-1. <b>David J</b> is the brave one calling a draw. Then <b>Portugal–Kroatië</b> and <b>Zwitserland–Algerije</b>. <b>Roll-up United</b> is the one to hunt down.`;
 
 // standings
 const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));
@@ -433,7 +436,7 @@ const CHANGES=[
  ["David J",76,"Nederland","Marokko",null,"2-1","2026-06-28T17:23"],
  ["David J",73,"Zuid-Afrika","Canada",null,"1-2","2026-06-28T17:22"]
 ];
-const SNAP={"Mark VA":{"3332966":"1-1","3332969":"1-0","3332994":"0-1","3333001":"3-0","3333005":"0-1","3333008":"2-1","3333014":"1-1","3333019":"3-1","3333027":"0-1","3333040":"1-0"},"MichaelVH":{"3332966":"1-0","3332969":"1-0","3332994":"0-1","3333001":"5-0","3333008":"1-0","3333014":"2-0","3333019":"2-0","3333027":"1-0","3333040":"2-0"},"DB":{"3332966":"1-1","3332969":"2-1","3332994":"0-1","3332995":"2-1","3333001":"3-0","3333005":"0-1","3333008":"2-0","3333014":"2-0","3333019":"2-0","3333020":"0-2","3333027":"1-0","3333040":"2-1"},"Roll-up United":{"3332966":"1-0","3332969":"1-0","3332994":"1-2","3332995":"2-1","3333001":"2-0","3333005":"0-1","3333008":"1-0","3333014":"2-0","3333019":"2-1","3333027":"1-0","3333040":"2-1"},"David J":{"3333014":"3-1","3333040":"2-1"},"Mahir Bikhan":{"3332969":"1-0","3333014":"2-0","3333040":"1-0"},"Bart C":{"3332966":"2-2","3332969":"2-1","3332994":"0-2","3333001":"3-0","3333008":"2-1","3333014":"2-0","3333019":"2-0","3333027":"3-1","3333040":"3-2"}};
+const SNAP={"Mark VA":{"3332966":"1-1","3332976":"0-1","3332994":"0-1","3332995":"1-1","3333001":"3-0","3333005":"0-1","3333008":"2-1","3333019":"3-1","3333020":"0-3","3333027":"0-1"},"MichaelVH":{"3332966":"1-0","3332994":"0-1","3333001":"5-0","3333008":"1-0","3333019":"2-0","3333027":"1-0"},"DB":{"3332966":"1-1","3332994":"0-1","3332995":"2-1","3333001":"3-0","3333005":"0-1","3333008":"2-0","3333019":"2-0","3333020":"0-2","3333027":"1-0"},"Roll-up United":{"3332966":"1-0","3332994":"1-2","3332995":"2-1","3333001":"2-0","3333005":"0-1","3333008":"1-0","3333019":"2-1","3333027":"1-0"},"David J":{"3332966":"2-1","3333019":"1-1"},"Bart C":{"3332964":"1-2","3332966":"2-2","3332976":"1-2","3332994":"0-2","3332995":"2-1","3333001":"3-0","3333005":"1-3","3333008":"2-1","3333019":"2-0","3333020":"0-2","3333027":"3-1"}};
 function renderChanges(){
   const host=document.getElementById('changefeed'); if(!host) return;
   if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}

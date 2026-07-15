@@ -191,34 +191,34 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 14/07 16:07
+    Flags via flagcdn.com · updated 15/07 07:05
   </footer>
 </div>
 
 <script>
 // [name, exact, gd, winner, miss, points]
 const STAND=[
- ["Roll-up United",9,9,26,28,633,322],
- ["DB",10,8,23,31,632,330],
- ["Mahir Bikhan",11,6,25,30,608,301],
- ["Bart C",7,10,25,30,599,304],
- ["David J",3,7,28,34,566,313],
- ["MichaelVH",3,11,27,27,511,242],
- ["Mark VA",7,5,22,38,486,233],
+ ["Roll-up United",9,9,26,28,634,323],
+ ["DB",10,8,23,31,633,331],
+ ["Mahir Bikhan",11,6,25,30,609,302],
+ ["Bart C",7,10,25,30,600,305],
+ ["David J",3,7,28,34,567,314],
+ ["MichaelVH",3,11,27,27,521,252],
+ ["Mark VA",7,5,22,38,487,234],
  ["Ngoy naar de titel!",10,7,25,29,303,0],
  ["the one and only",0,0,0,3,3,0]
 ];
-const PREV={"Roll-up United":1,"DB":2,"Mahir Bikhan":3,"David J":4,"Bart C":5,"MichaelVH":6,"Mark VA":7,"Ngoy naar de titel!":8,"the one and only":9};
-const PREVAT=100;
+const PREV={"Roll-up United":1,"DB":2,"Mahir Bikhan":3,"Bart C":4,"David J":5,"MichaelVH":6,"Mark VA":7,"Ngoy naar de titel!":8,"the one and only":9};
+const PREVAT=101;
 // home, homeISO, away, awayISO, when, pH, pD, pA, picks
 const NEXT=[
- ["Frankrijk","fr","Spanje","es","14/07 21:00",null,null,null,"Mark VA 1-1 · MichaelVH 0-1 · DB 2-0 · Roll-up United 2-0 · David J 1-0 · Mahir Bikhan 2-1"],
- ["Engeland","gb-eng","Argentinië","ar","15/07 21:00",null,null,null,"Mark VA 1-2 · MichaelVH 1-0 · DB 1-0 · Roll-up United 1-0 · Mahir Bikhan 1-1"],
- ["Verliezer HF 1","","Verliezer HF 2","","18/07 23:00",null,null,null,""],
- ["Winnaar HF 1","","Winnaar HF 2","","19/07 21:00",null,null,null,""]
+ ["Engeland","gb-eng","Argentinië","ar","15/07 21:00",null,null,null,"Mark VA 1-2 · MichaelVH 1-0 · DB 1-0 · Roll-up United 1-0 · David J 2-1 · Mahir Bikhan 1-1 · Bart C 1-0"],
+ ["Frankrijk","fr","Verliezer HF 2","","18/07 23:00",null,null,null,""],
+ ["Spanje","es","Winnaar HF 2","","19/07 21:00",null,null,null,""]
 ];
 // home, homeISO, away, awayISO, when, homeScore, awayScore, "Name h-a|pts · ..."
 const LAST=[
+ ["Frankrijk","fr","Spanje","es","14/07",0,2,"MichaelVH 0-1|10 · Mark VA 1-1|1 · DB 2-0|1 · Roll-up United 2-0|1 · David J 1-0|1 · Mahir Bikhan 2-1|1 · Bart C 1-0|1"],
  ["Argentinië","ar","Zwitserland","ch","12/07",3,1,"DB 2-0|14 · Mahir Bikhan 2-0|14 · Bart C 2-0|14 · Mark VA 2-1|10 · Roll-up United 1-0|10 · MichaelVH 0-0|1"],
  ["Noorwegen","no","Engeland","gb-eng","11/07",1,2,"DB 1-2|20 · Roll-up United 1-2|20 · Bart C 1-2|20 · Mahir Bikhan 1-1|10 · Mark VA 1-0|1 · MichaelVH 1-0|1"],
  ["Spanje","es","België","be","10/07",2,1,"Mark VA 2-1|20 · Roll-up United 1-0|14 · MichaelVH 0-1|1 · DB 0-1|1 · David J 1-1|1 · Mahir Bikhan 1-2|1 · Bart C 1-2|1"],
@@ -329,13 +329,13 @@ function out(s){const [h,a]=s.split('-').map(Number);return h>a?'H':h<a?'A':'D';
 function scClass(s,fav){const o=out(s);return o==='D'?'sy':(fav==null?'':(o===fav?'sg':'sr'));}
 
 // subtitle
-function sub(){document.getElementById('sub').textContent=`Knockout phase · 72/72 group · 28/32 KO · ${STAND.length} players`;}
+function sub(){document.getElementById('sub').textContent=`Knockout phase · 72/72 group · 29/32 KO · ${STAND.length} players`;}
 sub();
 
 document.getElementById('missed').innerHTML=
- `Latest in: <b>Argentinië 3-1 Zwitserland</b> — 2 called it dead-on (<b>Mark VA, Roll-up United</b>). <b>Roll-up United</b> leads on <b>633</b>, but <b>DB</b> is right on the bumper, 9 exact and ice-cold. Spare a thought for <b>the one and only</b>, lost at sea on 3. <b>Roll-up United</b> got cold feet — swapped the #101 pick 1-0 → 2-0 (Changes).`;
+ `Latest in: <b>Frankrijk 0-2 Spanje</b> — only <b>MichaelVH</b> nailed it. <b>Roll-up United</b> leads on <b>634</b>, but <b>DB</b> is right on the bumper, 9 exact and ice-cold. Anchored to the foot: <b>the one and only</b>, 3 and 631 off the pace.`;
 document.getElementById('upcoming').innerHTML=
- `On deck: <b>Frankrijk – Spanje</b>. 2 of 6 have piled onto <b>2-0</b>. <b>DB</b> is swinging for the fences at 2-0. <b>Mark VA</b> is the brave one calling a draw. Then <b>Engeland–Argentinië</b> and <b>Verliezer HF 1–Verliezer HF 2</b>. <b>Roll-up United</b> is the one to hunt down.`;
+ `Up next: <b>Engeland – Argentinië</b>. 4 of 7 have piled onto <b>1-0</b>. <b>Mahir Bikhan</b> is the brave one calling a draw. Then <b>Frankrijk–Verliezer HF 2</b> and <b>Spanje–Winnaar HF 2</b>. <b>Roll-up United</b> is the one to hunt down.`;
 
 // standings
 const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));
@@ -460,7 +460,7 @@ const CHANGES=[
  ["David J",76,"Nederland","Marokko",null,"2-1","2026-06-28T17:23"],
  ["David J",73,"Zuid-Afrika","Canada",null,"1-2","2026-06-28T17:22"]
 ];
-const SNAP={"Mark VA":{"3332980":"1-1","3333041":"1-2"},"MichaelVH":{"3332980":"0-1","3333041":"1-0"},"DB":{"3332980":"2-0","3333041":"1-0"},"Roll-up United":{"3332980":"2-0","3333041":"1-0"},"David J":{"3332980":"1-0"},"Mahir Bikhan":{"3332980":"2-1","3333041":"1-1"}};
+const SNAP={"Mark VA":{"3333041":"1-2"},"MichaelVH":{"3333041":"1-0"},"DB":{"3333041":"1-0"},"Roll-up United":{"3333041":"1-0"},"David J":{"3333041":"2-1"},"Mahir Bikhan":{"3333041":"1-1"},"Bart C":{"3333041":"1-0"}};
 function renderChanges(){
   const host=document.getElementById('changefeed'); if(!host) return;
   if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}

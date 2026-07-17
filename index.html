@@ -191,7 +191,7 @@
 
   <footer>
     Made for the Padellen Zonder Ballen crew · data from <a href="https://wkpronostiek.sporza.be/" target="_blank" rel="noopener">Sporza Pronostiek ↗</a><br>
-    Flags via flagcdn.com · updated 16/07 16:09
+    Flags via flagcdn.com · updated 17/07 07:05
   </footer>
 </div>
 
@@ -212,8 +212,8 @@ const PREV={"Roll-up United":1,"DB":2,"Mahir Bikhan":3,"Bart C":4,"David J":5,"M
 const PREVAT=102;
 // home, homeISO, away, awayISO, when, pH, pD, pA, picks
 const NEXT=[
- ["Frankrijk","fr","Engeland","gb-eng","18/07 23:00",null,null,null,"Mark VA 2-0 · DB 1-0 · Roll-up United 1-0 · Mahir Bikhan 2-1"],
- ["Spanje","es","Argentinië","ar","19/07 21:00",null,null,null,"Mark VA 1-1 · DB 2-0 · Roll-up United 2-0 · Mahir Bikhan 0-2"]
+ ["Frankrijk","fr","Engeland","gb-eng","18/07 23:00",null,null,null,"Mark VA 2-0 · DB 1-0 · Roll-up United 1-0 · Mahir Bikhan 2-1 · Bart C 2-1"],
+ ["Spanje","es","Argentinië","ar","19/07 21:00",null,null,null,"Mark VA 1-1 · DB 2-0 · Roll-up United 2-0 · Mahir Bikhan 0-2 · Bart C 2-1"]
 ];
 // home, homeISO, away, awayISO, when, homeScore, awayScore, "Name h-a|pts · ..."
 const LAST=[
@@ -335,7 +335,7 @@ sub();
 document.getElementById('missed').innerHTML=
  `Latest in: <b>Engeland 1-2 Argentinië</b> — not a soul saw that coming. <b>Roll-up United</b> leads on <b>635</b>, but <b>DB</b> is right on the bumper, 9 exact and ice-cold. And <b>the one and only</b>? Vanished — rock bottom on 3, 632 adrift.`;
 document.getElementById('upcoming').innerHTML=
- `Next up: <b>Frankrijk – Engeland</b>. 2 of 4 have piled onto <b>1-0</b>. <b>Mark VA</b> is swinging for the fences at 2-0. Then <b>Spanje–Argentinië</b>. <b>Roll-up United</b> is the one to hunt down.`;
+ `Next up: <b>Frankrijk – Engeland</b>. 2 of 5 have piled onto <b>1-0</b>. <b>Mark VA</b> is swinging for the fences at 2-0. Then <b>Spanje–Argentinië</b>. <b>Roll-up United</b> is the one to hunt down.`;
 
 // standings
 const ranked=[...STAND].sort((a,b)=> b[5]-a[5]||b[1]-a[1]||b[2]-a[2]||b[3]-a[3]||a[0].localeCompare(b[0]));
@@ -460,7 +460,7 @@ const CHANGES=[
  ["David J",76,"Nederland","Marokko",null,"2-1","2026-06-28T17:23"],
  ["David J",73,"Zuid-Afrika","Canada",null,"1-2","2026-06-28T17:22"]
 ];
-const SNAP={"Mark VA":{"3332984":"1-1","3333031":"2-0"},"DB":{"3332984":"2-0","3333031":"1-0"},"Roll-up United":{"3332984":"2-0","3333031":"1-0"},"Mahir Bikhan":{"3332984":"0-2","3333031":"2-1"}};
+const SNAP={"Mark VA":{"3332984":"1-1","3333031":"2-0"},"DB":{"3332984":"2-0","3333031":"1-0"},"Roll-up United":{"3332984":"2-0","3333031":"1-0"},"Mahir Bikhan":{"3332984":"0-2","3333031":"2-1"},"Bart C":{"3332984":"2-1","3333031":"2-1"}};
 function renderChanges(){
   const host=document.getElementById('changefeed'); if(!host) return;
   if(!CHANGES.length){host.innerHTML='<div class="blank"><span class="e">🪵</span>No changes logged yet.<br>Edits show up here as players tweak their predictions.</div>';return;}
